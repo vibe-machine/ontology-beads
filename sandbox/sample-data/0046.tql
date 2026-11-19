@@ -1,1 +1,1 @@
-match $bead isa Bead, has beadId "one-5"; insert $comment isa Comment, has author "agent-3", has commentText "Reproduced in the Wave view too.", has createdAt 2026-11-13T11:00:00; isAbout (content: $comment, subjectMatter: $bead);
+match $bead isa Bead, has beadId "one-3"; $kind isa HistoryEntryType, has name "closed"; insert $entry isa HistoryEntry, has actor "agent-3", has newValue "Rows render", has createdAt 2026-11-08T17:00:00; isAbout (content: $entry, subjectMatter: $bead); isCategorizedBy (categorizedThing: $entry, category: $kind);

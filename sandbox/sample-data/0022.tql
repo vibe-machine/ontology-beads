@@ -1,1 +1,1 @@
-match $child isa Bead, has beadId "one-4"; $parent isa Bead, has beadId "one-2"; insert isPartOf (part: $child, whole: $parent);
+match $repo isa BeadRepository, has name "OneWorkspace"; $bead isa Bead; insert isMemberOf (member: $bead, collection: $repo);

@@ -1,8 +1,8 @@
 {
   "name": "beads",
   "displayName": "Beads",
-  "version": "0.1.0",
-  "description": "Beads 1.3.4, the issue tracker for planning work with agents: beads, their status, type, priority and labels, blocks and parent links, gates, leases, waves, history and comments. Answers what is ready, blocked, held, stale and under each epic.",
+  "version": "0.1.1",
+  "description": "Beads 1.3.4 for planning work with agents, across repositories: beads with status, type, priority, labels, blocks and parent links, gates, leases, waves, history, comments and dispatch facts. Answers what is ready, blocked, held, stale, and how far each repository's copy has got.",
   "author": "vibe-machine",
   "license": "MIT",
   "source": "https://github.com/vibe-machine/ontology-beads",
@@ -81,7 +81,11 @@
     "sandbox/sample-data/0043.tql",
     "sandbox/sample-data/0044.tql",
     "sandbox/sample-data/0045.tql",
-    "sandbox/sample-data/0046.tql"
+    "sandbox/sample-data/0046.tql",
+    "sandbox/sample-data/0047.tql",
+    "sandbox/sample-data/0048.tql",
+    "sandbox/sample-data/0049.tql",
+    "sandbox/sample-data/0050.tql"
   ],
   "dependencies": [
     {
@@ -98,7 +102,7 @@
     "release:check": "../ontology-tooling/bin/ont release --repo . --validate-only"
   },
   "manifests": [
-    "manifests/beads-v0.1.0.package-manifest.json"
+    "manifests/beads-v0.1.1.package-manifest.json"
   ],
   "assembly": {
     "loadOrder": [
@@ -119,11 +123,11 @@
       "data/beads-schema-docs.tql",
       "data/beads-provenance.tql",
       "manifests/package-manifest.schema.json",
-      "manifests/beads-v0.1.0.package-manifest.json"
+      "manifests/beads-v0.1.1.package-manifest.json"
     ]
   },
   "provenance": {
-    "manifest": "manifests/beads-v0.1.0.package-manifest.json",
+    "manifest": "manifests/beads-v0.1.1.package-manifest.json",
     "status": "bootstrap"
   },
   "legacyDocumentation": {

@@ -1,1 +1,1 @@
-match $blocker isa Bead, has beadId "one-12"; $blocked isa Bead, has beadId "one-3"; insert precedes (predecessor: $blocker, successor: $blocked);
+match $child isa Bead, has beadId "one-7"; $parent isa Bead, has beadId "one-1"; insert isPartOf (part: $child, whole: $parent);

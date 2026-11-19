@@ -21,13 +21,23 @@ define
   attribute newValue, value string;
   attribute author, value string;
   attribute commentText, value string;
+  attribute folderPath, value string;
+  attribute beadDatabaseName, value string;
+  attribute lastCopiedCommit, value string;
+  attribute lastCopiedFingerprint, value string;
+  attribute lastCopiedAt, value datetime;
+  attribute tmuxSocket, value string;
+  attribute tmuxSession, value string;
+  attribute worktreePath, value string;
+  attribute baseBranch, value string;
+  attribute agentPid, value integer;
 
   relation related sub isConnectedTo,
     relates relatedBead @card(0..2);
   relation supersedes sub isBasedOn;
 
   entity Bead sub Task,
-    owns beadId @key,
+    owns beadId,
     owns title,
     owns description,
     owns design,
@@ -40,6 +50,11 @@ define
     owns startedAt,
     owns closedAt,
     owns closeReason,
+    owns tmuxSocket,
+    owns tmuxSession,
+    owns worktreePath,
+    owns baseBranch,
+    owns agentPid,
     plays isCategorizedBy:categorizedThing,
     plays isPartOf:whole,
     plays precedes:predecessor,
@@ -49,6 +64,15 @@ define
     plays related:relatedBead,
     plays isAbout:subjectMatter,
     plays isMemberOf:member,
+    plays isMemberOf:collection;
+
+  entity BeadRepository sub Collection,
+    owns name,
+    owns folderPath,
+    owns beadDatabaseName,
+    owns lastCopiedCommit,
+    owns lastCopiedFingerprint,
+    owns lastCopiedAt,
     plays isMemberOf:collection;
 
   entity BeadStatus sub Category, owns name, plays isCategorizedBy:category;

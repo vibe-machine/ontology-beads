@@ -1,11 +1,11 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-beads
-# upstream-tag: v0.1.0
-# upstream-commit: unpublished
+# upstream-tag: v0.1.1
+# upstream-commit: c9f2b83c9062ff55bf75442faae7dff7689b7351
 # source-artifacts:
 # - package.json
 # - schema/beads.tql
-# manifest: manifests/beads-v0.1.0.package-manifest.json
+# manifest: manifests/beads-v0.1.1.package-manifest.json
 # generator: lingo-lab-package/1.0.0
 define
 

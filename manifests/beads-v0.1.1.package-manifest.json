@@ -3,48 +3,48 @@
   "manifestVersion": "1.0.0",
   "package": {
     "name": "beads",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "upstream": {
     "repoUrl": "https://github.com/vibe-machine/ontology-beads",
-    "tag": "v0.1.0",
-    "commit": "unpublished",
+    "tag": "v0.1.1",
+    "commit": "c9f2b83c9062ff55bf75442faae7dff7689b7351",
     "sourceArtifacts": [
       {
         "path": "package.json",
-        "sha256": "3d9929d69d4ec457ade1b303391ba7e0544f65171ea56096c77f5e47abba5c37"
+        "sha256": "0dab8c21eb7539e5f4a320aed860968bdd55d9edc752489715c70919a236aeab"
       },
       {
         "path": "schema/beads.tql",
-        "sha256": "8af819f563d8703f7d1ce322efdf744d313b792ef7e71cdf118c59a6f164cf94"
+        "sha256": "64703dc0ad6ab4313d9c583e9060793f86a57e8bc6216b478c923c5de432a7bb"
       }
     ]
   },
   "generator": {
     "name": "lingo-lab-package",
     "version": "1.0.0",
-    "generatedAt": "2026-11-19T18:51:37Z"
+    "generatedAt": "2026-11-19T23:37:38Z"
   },
   "artifacts": [
     {
       "kind": "meta-schema",
       "path": "schema/self-describing-schema.tql",
-      "sha256": "f9a0a8e164ed416ec7b499ab88833e79b520b51691f4280aa8ed058cb8d8a7d1"
+      "sha256": "bd59c6dd96779c86373ddc91514e24db68aae531f5ee87d41f25bab1529d8787"
     },
     {
       "kind": "provenance-schema",
       "path": "schema/package-provenance.tql",
-      "sha256": "a0b2a08eb5cfe48ae33cf644b8b4cd1ea495589e38a9a61b888cae9199f41fbd"
+      "sha256": "3408bcf2a8a3863ff17a253af5982e5726ad425189cdf609b44fbd0c1eaea223"
     },
     {
       "kind": "administrative-schema",
       "path": "schema/administrative-operations.tql",
-      "sha256": "45052da7223c147b3690b293f5485dd833d93461d052e6cc2812cdb8e0301f65"
+      "sha256": "53a75aa4e180c07cec50845c3e981167b2d4439b7541175b4eb0837c30a58283"
     },
     {
       "kind": "documentation",
       "path": "data/beads-schema-docs.tql",
-      "sha256": "7dd9082345ffaf8b44918cf962709e93dbbfecb5b1c1223d19362d49e34cf480"
+      "sha256": "ed94b02f205cef4e4f857a8328e08f3a0927062a5ad5e5b6e8069321a5c231b9"
     },
     {
       "kind": "manifest-schema",
@@ -54,7 +54,7 @@
     {
       "kind": "provenance-seeds",
       "path": "data/beads-provenance.tql",
-      "sha256": "90ebec100a3d53eadebe919767cada0d5dd7b17c75756d090e4a89ba6f9fea37"
+      "sha256": "737922c913a39b7b8f8b7f5f49f1aa8d830c9ac8953282fb228fd62d6fd81b79"
     }
   ]
 }

@@ -1,1 +1,1 @@
-match $newer isa Bead, has beadId "one-14"; $older isa Bead, has beadId "one-17"; insert supersedes (derivedThing: $newer, basis: $older);
+match $blocker isa Bead, has beadId "one-12"; $blocked isa Bead, has beadId "one-3"; insert precedes (predecessor: $blocker, successor: $blocked);

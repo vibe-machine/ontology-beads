@@ -1,1 +1,1 @@
-match $member isa Bead, has beadId "one-5"; $wave isa Bead, has beadId "one-15"; insert isMemberOf (member: $member, collection: $wave);
+match $found isa Bead, has beadId "one-16"; $origin isa Bead, has beadId "one-17"; insert isTriggeredBy (triggeredThing: $found, triggeringEvent: $origin);

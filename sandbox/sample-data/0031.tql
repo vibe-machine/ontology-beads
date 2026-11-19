@@ -1,1 +1,1 @@
-match $found isa Bead, has beadId "one-16"; $origin isa Bead, has beadId "one-17"; insert isTriggeredBy (triggeredThing: $found, triggeringEvent: $origin);
+match $child isa Bead, has beadId "one-10"; $parent isa Bead, has beadId "one-9"; insert isPartOf (part: $child, whole: $parent);

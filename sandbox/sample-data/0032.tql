@@ -1,1 +1,1 @@
-match $first isa Bead, has beadId "one-17"; $second isa Bead, has beadId "one-13"; insert related (relatedBead: $first, relatedBead: $second);
+match $repo isa BeadRepository, has name "OneWorkspace"; $blocker isa Bead, has beadId "one-11"; $blocked isa Bead, has beadId "one-4"; isMemberOf (member: $blocked, collection: $repo); insert precedes (predecessor: $blocker, successor: $blocked);
