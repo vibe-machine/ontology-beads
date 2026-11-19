@@ -16,7 +16,7 @@ The questions Beads is meant to answer, and the query that answers each one. Ins
 12. Which beads break our tree rules: a task or bug directly under an epic, a feature under a feature, or an epic still open though every child is closed? — [`queries/which-beads-break-our-tree-rules.tql`](which-beads-break-our-tree-rules.tql)
 13. Which beads carry a given label, or any one of several labels? — [`queries/which-beads-carry-the-label-ux-or-backend.tql`](which-beads-carry-the-label-ux-or-backend.tql)
 14. Which open bugs are at priority 0 or 1? — [`queries/which-open-bugs-are-at-priority-0-or-1.tql`](which-open-bugs-are-at-priority-0-or-1.tql)
-15. How many beads are in each status, and of each type? — no query yet
+15. How many beads are in each status, and of each type? — [`queries/how-many-beads-are-in-each-status-and-of-each-type.tql`](how-many-beads-are-in-each-status-and-of-each-type.tql)
 16. Which beads were created, or closed, in a given period? — no query yet
 17. Which beads were discovered while working on this one, which beads are related to it, and which bead replaces it? — no query yet
 18. What happened to this bead and when, and who did it: created, claimed, status changed, labelled, closed, reopened? — no query yet

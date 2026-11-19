@@ -96,6 +96,13 @@ update
   $query14 has storedPackage "beads";
   $query14 has storedVersion "0.1.0";
   $query14 has storedQueryExplanation "Keeps beads of type bug with status open whose priority level is at most 1.";
+put $query15 isa StoredQuery, has storedQueryName "beads/how-many-beads-are-in-each-status-and-of-each-type";
+update
+  $query15 has storedQueryTitle "How many beads are in each status, and of each type";
+  $query15 has storedQueryText "match\n  $bead isa Bead;\n  isCategorizedBy (categorizedThing: $bead, category: $category);\n  { $category isa BeadStatus; } or { $category isa BeadType; };\n  $category isa! $categoryKind, has name $categoryName;\nreduce $beadCount = count groupby $categoryKind, $categoryName;";
+  $query15 has storedPackage "beads";
+  $query15 has storedVersion "0.1.0";
+  $query15 has storedQueryExplanation "Matches each bead with its status or its type, then counts beads per category kind and name.";
 put $question1 isa StoredQuestion, has storedQuestionId "beads/q-01";
 update
   $question1 has storedQuestionText "What is recorded about this bead: its title, description, design, acceptance criteria, notes, type, status and priority?";
@@ -200,6 +207,7 @@ update
   $question15 has storedPackage "beads";
   $question15 has storedVersion "0.1.0";
   $question15 has storedQuestionOrder 15;
+put storedAnswer (question: $question15, query: $query15);
 put $question16 isa StoredQuestion, has storedQuestionId "beads/q-16";
 update
   $question16 has storedQuestionText "Which beads were created, or closed, in a given period?";

@@ -1,0 +1,8 @@
+# How many beads are in each status, and of each type?
+# Matches each bead with its status or its type, then counts beads per category kind and name.
+match
+  $bead isa Bead;
+  isCategorizedBy (categorizedThing: $bead, category: $category);
+  { $category isa BeadStatus; } or { $category isa BeadType; };
+  $category isa! $categoryKind, has name $categoryName;
+reduce $beadCount = count groupby $categoryKind, $categoryName;
