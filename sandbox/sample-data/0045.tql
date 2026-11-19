@@ -1,0 +1,1 @@
+match $bead isa Bead, has beadId "one-5"; insert $comment isa Comment, has author "robert@example.com", has commentText "Happens after collapsing a node.", has createdAt 2026-11-12T10:00:00; isAbout (content: $comment, subjectMatter: $bead);

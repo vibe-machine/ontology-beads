@@ -1,0 +1,89 @@
+# Category entries of Beads; installed with the package.
+
+put $c1_s isa BeadStatus, has name "open";
+
+put $c2_s isa BeadStatus, has name "in_progress";
+
+put $c3_s isa BeadStatus, has name "blocked";
+
+put $c4_s isa BeadStatus, has name "deferred";
+
+put $c5_s isa BeadStatus, has name "closed";
+
+put $c6_s isa BeadStatus, has name "pinned";
+
+put $c7_t isa BeadType, has name "task";
+
+put $c8_t isa BeadType, has name "bug";
+
+put $c9_t isa BeadType, has name "feature";
+
+put $c10_t isa BeadType, has name "epic";
+
+put $c11_t isa BeadType, has name "chore";
+
+put $c12_t isa BeadType, has name "decision";
+
+put $c13_t isa BeadType, has name "spike";
+
+put $c14_t isa BeadType, has name "gate";
+
+put $c15_t isa BeadType, has name "wave";
+
+put $c16_p isa Priority, has name "P0", has priorityLevel 0;
+
+put $c17_p isa Priority, has name "P1", has priorityLevel 1;
+
+put $c18_p isa Priority, has name "P2", has priorityLevel 2;
+
+put $c19_p isa Priority, has name "P3", has priorityLevel 3;
+
+put $c20_p isa Priority, has name "P4", has priorityLevel 4;
+
+put $c21_g isa GateType, has name "human";
+
+put $c22_g isa GateType, has name "timer";
+
+put $c23_g isa GateType, has name "gh:run";
+
+put $c24_g isa GateType, has name "gh:pr";
+
+put $c25_g isa GateType, has name "bead";
+
+put $c26_h isa HistoryEntryType, has name "created";
+
+put $c27_h isa HistoryEntryType, has name "updated";
+
+put $c28_h isa HistoryEntryType, has name "claimed";
+
+put $c29_h isa HistoryEntryType, has name "status_changed";
+
+put $c30_h isa HistoryEntryType, has name "commented";
+
+put $c31_h isa HistoryEntryType, has name "closed";
+
+put $c32_h isa HistoryEntryType, has name "reopened";
+
+put $c33_h isa HistoryEntryType, has name "renamed";
+
+put $c34_h isa HistoryEntryType, has name "dependency_added";
+
+put $c35_h isa HistoryEntryType, has name "dependency_removed";
+
+put $c36_h isa HistoryEntryType, has name "label_added";
+
+put $c37_h isa HistoryEntryType, has name "label_removed";
+
+put $c38_l isa BeadLabel, has name "ux";
+
+put $c39_l isa BeadLabel, has name "backend";
+
+put $c40_l isa BeadLabel, has name "tvm:component:plan";
+
+put $c41_l isa BeadLabel, has name "tvm:component:dispatch";
+
+put $c42_l isa BeadLabel, has name "tvm:agent=active";
+
+put $c43_l isa BeadLabel, has name "tvm:wave=running";
+
+put $c44_l isa BeadLabel, has name "tvm:wave=done";

@@ -1,0 +1,1 @@
+match $newer isa Bead, has beadId "one-14"; $older isa Bead, has beadId "one-17"; insert supersedes (derivedThing: $newer, basis: $older);

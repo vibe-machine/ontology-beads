@@ -1,0 +1,64 @@
+# Provenance bootstrap
+# upstream-repo: https://github.com/vibe-machine/ontology-beads
+# upstream-tag: v0.1.0
+# upstream-commit: unpublished
+# source-artifacts:
+# - package.json
+# - schema/beads.tql
+# manifest: manifests/beads-v0.1.0.package-manifest.json
+# generator: lingo-lab-package/1.0.0
+
+put $module isa OntologyModule,
+  has moduleName "beads",
+  has moduleRepoUrl "https://github.com/vibe-machine/ontology-beads";
+
+put $version isa OntologyModuleVersion,
+  has moduleVersionKey "https://github.com/vibe-machine/ontology-beads@0.1.0",
+  has moduleVersion "0.1.0",
+  has upstreamCommit "unpublished",
+  has manifestPath "manifests/beads-v0.1.0.package-manifest.json",
+  has generatorName "lingo-lab-package",
+  has generatorVersion "1.0.0",
+  has generatedAt "2026-11-19T18:51:37Z";
+
+put (version: $version, module: $module) isa ontologyModuleVersionOf;
+
+put $s1 isa SourceArtifactRecord,
+  has sourcePath "package.json",
+  has sourceSha256 "3d9929d69d4ec457ade1b303391ba7e0544f65171ea56096c77f5e47abba5c37";
+put (version: $version, sourceArtifact: $s1) isa ontologyModuleVersionBasedOnSourceArtifact;
+
+put $s2 isa SourceArtifactRecord,
+  has sourcePath "schema/beads.tql",
+  has sourceSha256 "8af819f563d8703f7d1ce322efdf744d313b792ef7e71cdf118c59a6f164cf94";
+put (version: $version, sourceArtifact: $s2) isa ontologyModuleVersionBasedOnSourceArtifact;
+
+put $g1 isa GeneratedArtifactRecord,
+  has artifactPath "schema/self-describing-schema.tql",
+  has artifactKind "meta-schema",
+  has artifactSha256 "f9a0a8e164ed416ec7b499ab88833e79b520b51691f4280aa8ed058cb8d8a7d1";
+put (generatedArtifact: $g1, version: $version) isa generatedArtifactForOntologyModuleVersion;
+
+put $g2 isa GeneratedArtifactRecord,
+  has artifactPath "schema/package-provenance.tql",
+  has artifactKind "provenance-schema",
+  has artifactSha256 "a0b2a08eb5cfe48ae33cf644b8b4cd1ea495589e38a9a61b888cae9199f41fbd";
+put (generatedArtifact: $g2, version: $version) isa generatedArtifactForOntologyModuleVersion;
+
+put $g3 isa GeneratedArtifactRecord,
+  has artifactPath "schema/administrative-operations.tql",
+  has artifactKind "administrative-schema",
+  has artifactSha256 "45052da7223c147b3690b293f5485dd833d93461d052e6cc2812cdb8e0301f65";
+put (generatedArtifact: $g3, version: $version) isa generatedArtifactForOntologyModuleVersion;
+
+put $g4 isa GeneratedArtifactRecord,
+  has artifactPath "data/beads-schema-docs.tql",
+  has artifactKind "documentation",
+  has artifactSha256 "7dd9082345ffaf8b44918cf962709e93dbbfecb5b1c1223d19362d49e34cf480";
+put (generatedArtifact: $g4, version: $version) isa generatedArtifactForOntologyModuleVersion;
+
+put $g5 isa GeneratedArtifactRecord,
+  has artifactPath "manifests/package-manifest.schema.json",
+  has artifactKind "manifest-schema",
+  has artifactSha256 "07599fe20623f3304bec0987320050f12efc1faf04fad7c12176ffe88e0b6a48";
+put (generatedArtifact: $g5, version: $version) isa generatedArtifactForOntologyModuleVersion;

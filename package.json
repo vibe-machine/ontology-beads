@@ -1,0 +1,136 @@
+{
+  "name": "beads",
+  "displayName": "Beads",
+  "version": "0.1.0",
+  "description": "Beads 1.3.4, the issue tracker for planning work with agents: beads, their status, type, priority and labels, blocks and parent links, gates, leases, waves, history and comments. Answers what is ready, blocked, held, stale and under each epic.",
+  "author": "vibe-machine",
+  "license": "MIT",
+  "source": "https://github.com/vibe-machine/ontology-beads",
+  "prefix": "beads",
+  "schemas": [
+    {
+      "name": "self-describing-schema",
+      "file": "schema/self-describing-schema.tql"
+    },
+    {
+      "name": "package-provenance",
+      "file": "schema/package-provenance.tql"
+    },
+    {
+      "name": "administrative-operations",
+      "file": "schema/administrative-operations.tql"
+    },
+    {
+      "name": "stored-queries",
+      "file": "schema/stored-queries.tql"
+    },
+    {
+      "name": "beads",
+      "file": "schema/beads.tql"
+    }
+  ],
+  "data": [
+    "data/beads-provenance.tql",
+    "data/beads-schema-docs.tql",
+    "data/beads-categories.tql",
+    "data/beads-questions.tql"
+  ],
+  "sampleData": [
+    "sandbox/sample-data/0001.tql",
+    "sandbox/sample-data/0002.tql",
+    "sandbox/sample-data/0003.tql",
+    "sandbox/sample-data/0004.tql",
+    "sandbox/sample-data/0005.tql",
+    "sandbox/sample-data/0006.tql",
+    "sandbox/sample-data/0007.tql",
+    "sandbox/sample-data/0008.tql",
+    "sandbox/sample-data/0009.tql",
+    "sandbox/sample-data/0010.tql",
+    "sandbox/sample-data/0011.tql",
+    "sandbox/sample-data/0012.tql",
+    "sandbox/sample-data/0013.tql",
+    "sandbox/sample-data/0014.tql",
+    "sandbox/sample-data/0015.tql",
+    "sandbox/sample-data/0016.tql",
+    "sandbox/sample-data/0017.tql",
+    "sandbox/sample-data/0018.tql",
+    "sandbox/sample-data/0019.tql",
+    "sandbox/sample-data/0020.tql",
+    "sandbox/sample-data/0021.tql",
+    "sandbox/sample-data/0022.tql",
+    "sandbox/sample-data/0023.tql",
+    "sandbox/sample-data/0024.tql",
+    "sandbox/sample-data/0025.tql",
+    "sandbox/sample-data/0026.tql",
+    "sandbox/sample-data/0027.tql",
+    "sandbox/sample-data/0028.tql",
+    "sandbox/sample-data/0029.tql",
+    "sandbox/sample-data/0030.tql",
+    "sandbox/sample-data/0031.tql",
+    "sandbox/sample-data/0032.tql",
+    "sandbox/sample-data/0033.tql",
+    "sandbox/sample-data/0034.tql",
+    "sandbox/sample-data/0035.tql",
+    "sandbox/sample-data/0036.tql",
+    "sandbox/sample-data/0037.tql",
+    "sandbox/sample-data/0038.tql",
+    "sandbox/sample-data/0039.tql",
+    "sandbox/sample-data/0040.tql",
+    "sandbox/sample-data/0041.tql",
+    "sandbox/sample-data/0042.tql",
+    "sandbox/sample-data/0043.tql",
+    "sandbox/sample-data/0044.tql",
+    "sandbox/sample-data/0045.tql",
+    "sandbox/sample-data/0046.tql"
+  ],
+  "dependencies": [
+    {
+      "name": "gist",
+      "version": ">=5.0.0"
+    }
+  ],
+  "scripts": {
+    "refresh:package-contract": "node ../ontology-gist/tools/package_contract/bootstrap_hand_authored_package.mjs .",
+    "validate:bootstrap": "node tools/package_contract/validate_bootstrap.mjs",
+    "test:typedb-bootstrap": "node tools/package_contract/validate_typedb_bootstrap.mjs",
+    "test": "npm run validate:bootstrap && npm run test:typedb-bootstrap",
+    "release": "../ontology-tooling/bin/ont release --repo .",
+    "release:check": "../ontology-tooling/bin/ont release --repo . --validate-only"
+  },
+  "manifests": [
+    "manifests/beads-v0.1.0.package-manifest.json"
+  ],
+  "assembly": {
+    "loadOrder": [
+      "schema/self-describing-schema.tql",
+      "schema/package-provenance.tql",
+      "schema/administrative-operations.tql",
+      "schema/stored-queries.tql",
+      "schema/beads.tql",
+      "data/beads-provenance.tql",
+      "data/beads-schema-docs.tql",
+      "data/beads-categories.tql",
+      "data/beads-questions.tql"
+    ],
+    "generatedArtifacts": [
+      "schema/self-describing-schema.tql",
+      "schema/package-provenance.tql",
+      "schema/administrative-operations.tql",
+      "data/beads-schema-docs.tql",
+      "data/beads-provenance.tql",
+      "manifests/package-manifest.schema.json",
+      "manifests/beads-v0.1.0.package-manifest.json"
+    ]
+  },
+  "provenance": {
+    "manifest": "manifests/beads-v0.1.0.package-manifest.json",
+    "status": "bootstrap"
+  },
+  "legacyDocumentation": {
+    "deprecatedFiles": [
+      "data/domains.tql",
+      "data/categorize.tql"
+    ],
+    "status": "superseded-by-schema-resource"
+  }
+}

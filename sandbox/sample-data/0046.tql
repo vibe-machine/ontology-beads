@@ -1,0 +1,1 @@
+match $bead isa Bead, has beadId "one-5"; insert $comment isa Comment, has author "agent-3", has commentText "Reproduced in the Wave view too.", has createdAt 2026-11-13T11:00:00; isAbout (content: $comment, subjectMatter: $bead);

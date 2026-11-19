@@ -1,0 +1,1 @@
+match $blocker isa Bead, has beadId "one-12"; $blocked isa Bead, has beadId "one-3"; insert precedes (predecessor: $blocker, successor: $blocked);

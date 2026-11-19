@@ -1,0 +1,24 @@
+# Provenance bootstrap
+# upstream-repo: https://github.com/vibe-machine/ontology-beads
+# upstream-tag: v0.1.0
+# upstream-commit: unpublished
+# source-artifacts:
+# - package.json
+# - schema/beads.tql
+# manifest: manifests/beads-v0.1.0.package-manifest.json
+# generator: lingo-lab-package/1.0.0
+define
+
+attribute installationKey, value string;
+attribute installedAt, value string;
+
+entity OntologyModuleInstallation sub Event,
+    owns installationKey @key,
+    owns installedAt,
+    plays installationOfOntologyModuleVersion:installation;
+
+relation installationOfOntologyModuleVersion sub isBasedOn,
+    relates installation as derivedThing,
+    relates version as basis;
+
+OntologyModuleVersion plays installationOfOntologyModuleVersion:version;

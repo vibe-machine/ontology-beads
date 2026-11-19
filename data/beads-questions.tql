@@ -1,0 +1,120 @@
+put $question1 isa StoredQuestion, has storedQuestionId "beads/q-01";
+update
+  $question1 has storedQuestionText "What is recorded about this bead: its title, description, design, acceptance criteria, notes, type, status and priority?";
+  $question1 has storedPackage "beads";
+  $question1 has storedVersion "0.1.0";
+  $question1 has storedQuestionOrder 1;
+put $question2 isa StoredQuestion, has storedQuestionId "beads/q-02";
+update
+  $question2 has storedQuestionText "Who owns this bead, who holds it now, when was it created, started and closed, and why was it closed?";
+  $question2 has storedPackage "beads";
+  $question2 has storedVersion "0.1.0";
+  $question2 has storedQuestionOrder 2;
+put $question3 isa StoredQuestion, has storedQuestionId "beads/q-03";
+update
+  $question3 has storedQuestionText "Which beads are ready to start: open, nothing open in front of them, most urgent first?";
+  $question3 has storedPackage "beads";
+  $question3 has storedVersion "0.1.0";
+  $question3 has storedQuestionOrder 3;
+put $question4 isa StoredQuestion, has storedQuestionId "beads/q-04";
+update
+  $question4 has storedQuestionText "Which beads are blocked, and by which open beads?";
+  $question4 has storedPackage "beads";
+  $question4 has storedVersion "0.1.0";
+  $question4 has storedQuestionOrder 4;
+put $question5 isa StoredQuestion, has storedQuestionId "beads/q-05";
+update
+  $question5 has storedQuestionText "What does finishing this bead unblock?";
+  $question5 has storedPackage "beads";
+  $question5 has storedVersion "0.1.0";
+  $question5 has storedQuestionOrder 5;
+put $question6 isa StoredQuestion, has storedQuestionId "beads/q-06";
+update
+  $question6 has storedQuestionText "Which beads wait on a person's approval, and which approvals are still open?";
+  $question6 has storedPackage "beads";
+  $question6 has storedVersion "0.1.0";
+  $question6 has storedQuestionOrder 6;
+put $question7 isa StoredQuestion, has storedQuestionId "beads/q-07";
+update
+  $question7 has storedQuestionText "Which beads are being worked on right now, and who or which agent holds each one?";
+  $question7 has storedPackage "beads";
+  $question7 has storedVersion "0.1.0";
+  $question7 has storedQuestionOrder 7;
+put $question8 isa StoredQuestion, has storedQuestionId "beads/q-08";
+update
+  $question8 has storedQuestionText "Which beads are marked in progress but have gone quiet for a number of days?";
+  $question8 has storedPackage "beads";
+  $question8 has storedVersion "0.1.0";
+  $question8 has storedQuestionOrder 8;
+put $question9 isa StoredQuestion, has storedQuestionId "beads/q-09";
+update
+  $question9 has storedQuestionText "What is under this epic, at every level, and how much of it is closed?";
+  $question9 has storedPackage "beads";
+  $question9 has storedVersion "0.1.0";
+  $question9 has storedQuestionOrder 9;
+put $question10 isa StoredQuestion, has storedQuestionId "beads/q-10";
+update
+  $question10 has storedQuestionText "Which epic and which feature does this bead belong to?";
+  $question10 has storedPackage "beads";
+  $question10 has storedVersion "0.1.0";
+  $question10 has storedQuestionOrder 10;
+put $question11 isa StoredQuestion, has storedQuestionId "beads/q-11";
+update
+  $question11 has storedQuestionText "Which component does this bead belong to?";
+  $question11 has storedPackage "beads";
+  $question11 has storedVersion "0.1.0";
+  $question11 has storedQuestionOrder 11;
+put $question12 isa StoredQuestion, has storedQuestionId "beads/q-12";
+update
+  $question12 has storedQuestionText "Which beads break our tree rules: a task or bug directly under an epic, a feature under a feature, or an epic still open though every child is closed?";
+  $question12 has storedPackage "beads";
+  $question12 has storedVersion "0.1.0";
+  $question12 has storedQuestionOrder 12;
+put $question13 isa StoredQuestion, has storedQuestionId "beads/q-13";
+update
+  $question13 has storedQuestionText "Which beads carry a given label, or any one of several labels?";
+  $question13 has storedPackage "beads";
+  $question13 has storedVersion "0.1.0";
+  $question13 has storedQuestionOrder 13;
+put $question14 isa StoredQuestion, has storedQuestionId "beads/q-14";
+update
+  $question14 has storedQuestionText "Which open bugs are at priority 0 or 1?";
+  $question14 has storedPackage "beads";
+  $question14 has storedVersion "0.1.0";
+  $question14 has storedQuestionOrder 14;
+put $question15 isa StoredQuestion, has storedQuestionId "beads/q-15";
+update
+  $question15 has storedQuestionText "How many beads are in each status, and of each type?";
+  $question15 has storedPackage "beads";
+  $question15 has storedVersion "0.1.0";
+  $question15 has storedQuestionOrder 15;
+put $question16 isa StoredQuestion, has storedQuestionId "beads/q-16";
+update
+  $question16 has storedQuestionText "Which beads were created, or closed, in a given period?";
+  $question16 has storedPackage "beads";
+  $question16 has storedVersion "0.1.0";
+  $question16 has storedQuestionOrder 16;
+put $question17 isa StoredQuestion, has storedQuestionId "beads/q-17";
+update
+  $question17 has storedQuestionText "Which beads were discovered while working on this one, which beads are related to it, and which bead replaces it?";
+  $question17 has storedPackage "beads";
+  $question17 has storedVersion "0.1.0";
+  $question17 has storedQuestionOrder 17;
+put $question18 isa StoredQuestion, has storedQuestionId "beads/q-18";
+update
+  $question18 has storedQuestionText "What happened to this bead and when, and who did it: created, claimed, status changed, labelled, closed, reopened?";
+  $question18 has storedPackage "beads";
+  $question18 has storedVersion "0.1.0";
+  $question18 has storedQuestionOrder 18;
+put $question19 isa StoredQuestion, has storedQuestionId "beads/q-19";
+update
+  $question19 has storedQuestionText "What comments are on this bead, and by whom?";
+  $question19 has storedPackage "beads";
+  $question19 has storedVersion "0.1.0";
+  $question19 has storedQuestionOrder 19;
+put $question20 isa StoredQuestion, has storedQuestionId "beads/q-20";
+update
+  $question20 has storedQuestionText "Which beads belong to a wave, which wave, and what state is the wave in?";
+  $question20 has storedPackage "beads";
+  $question20 has storedVersion "0.1.0";
+  $question20 has storedQuestionOrder 20;

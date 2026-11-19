@@ -1,0 +1,1 @@
+match $member isa Bead, has beadId "one-5"; $wave isa Bead, has beadId "one-15"; insert isMemberOf (member: $member, collection: $wave);

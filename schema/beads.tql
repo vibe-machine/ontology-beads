@@ -1,0 +1,110 @@
+define
+  attribute beadId, value string;
+  attribute title, value string;
+  attribute design, value string;
+  attribute acceptanceCriteria, value string;
+  attribute notes, value string;
+  attribute owner, value string;
+  attribute assignee, value string;
+  attribute createdAt, value datetime;
+  attribute updatedAt, value datetime;
+  attribute startedAt, value datetime;
+  attribute closedAt, value datetime;
+  attribute closeReason, value string;
+  attribute priorityLevel, value integer;
+  attribute leaseHolder, value string;
+  attribute grantedAt, value datetime;
+  attribute leaseExpiresAt, value datetime;
+  attribute heartbeatAt, value datetime;
+  attribute actor, value string;
+  attribute oldValue, value string;
+  attribute newValue, value string;
+  attribute author, value string;
+  attribute commentText, value string;
+
+  relation related sub isConnectedTo,
+    relates relatedBead @card(0..2);
+  relation supersedes sub isBasedOn;
+
+  entity Bead sub Task,
+    owns beadId @key,
+    owns title,
+    owns description,
+    owns design,
+    owns acceptanceCriteria,
+    owns notes,
+    owns owner,
+    owns assignee,
+    owns createdAt,
+    owns updatedAt,
+    owns startedAt,
+    owns closedAt,
+    owns closeReason,
+    plays isCategorizedBy:categorizedThing,
+    plays isPartOf:whole,
+    plays precedes:predecessor,
+    plays precedes:successor,
+    plays isTriggeredBy:triggeredThing,
+    plays isBasedOn:basis,
+    plays related:relatedBead,
+    plays isAbout:subjectMatter,
+    plays isMemberOf:member,
+    plays isMemberOf:collection;
+
+  entity BeadStatus sub Category, owns name, plays isCategorizedBy:category;
+  entity BeadType sub Category, owns name, plays isCategorizedBy:category;
+  entity Priority sub Category, owns name, owns priorityLevel, plays isCategorizedBy:category;
+  entity BeadLabel sub Category, owns name, plays isCategorizedBy:category;
+  entity GateType sub Category, owns name, plays isCategorizedBy:category;
+  entity HistoryEntryType sub Category, owns name, plays isCategorizedBy:category;
+
+  entity Lease sub Assignment,
+    owns leaseHolder,
+    owns grantedAt,
+    owns leaseExpiresAt,
+    owns heartbeatAt;
+
+  entity HistoryEntry sub ContentExpression,
+    owns actor,
+    owns oldValue,
+    owns newValue,
+    owns createdAt;
+
+  entity Comment sub ContentExpression,
+    owns author,
+    owns commentText,
+    owns createdAt;
+
+  fun ancestors($bead: Bead) -> { Bead }:
+    match
+      {
+        isPartOf (part: $bead, whole: $ancestor);
+        $ancestor isa Bead;
+      } or {
+        isPartOf (part: $bead, whole: $parent);
+        $parent isa Bead;
+        let $ancestor in ancestors($parent);
+      };
+    return { $ancestor };
+
+  fun descendants($root: Bead) -> { Bead }:
+    match
+      {
+        isPartOf (part: $descendant, whole: $root);
+        $descendant isa Bead;
+      } or {
+        isPartOf (part: $child, whole: $root);
+        $child isa Bead;
+        let $descendant in descendants($child);
+      };
+    return { $descendant };
+
+  fun openBlockers($bead: Bead) -> { Bead }:
+    match
+      precedes (predecessor: $blocker, successor: $bead);
+      $blocker isa Bead;
+      isCategorizedBy (categorizedThing: $blocker, category: $status);
+      $status isa BeadStatus, has name $statusName;
+      $statusName != "closed";
+      $statusName != "pinned";
+    return { $blocker };

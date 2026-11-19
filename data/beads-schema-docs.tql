@@ -1,0 +1,712 @@
+# Provenance bootstrap
+# upstream-repo: https://github.com/vibe-machine/ontology-beads
+# upstream-tag: v0.1.0
+# upstream-commit: unpublished
+# source-artifacts:
+# - package.json
+# - schema/beads.tql
+# manifest: manifests/beads-v0.1.0.package-manifest.json
+# generator: lingo-lab-package/1.0.0
+
+put $module isa SchemaModule,
+  has moduleKey "beads",
+  has moduleName "Beads",
+  has moduleKind "hand-authored-package";
+
+put $r1 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#Bead",
+  has iri "https://github.com/vibe-machine/ontology-beads#Bead",
+  has typeLabel "Bead",
+  has kind "entity",
+  has prefLabel "Bead",
+  has definition "A bead is one unit of planned work in beads, such as a task, bug, feature, epic, gate or wave. It holds its text, status, type, priority, who owns and holds it, and when it was created, started and closed.";
+put (resource: $r1, module: $module) isa inModule;
+
+put $r2 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#BeadStatus",
+  has iri "https://github.com/vibe-machine/ontology-beads#BeadStatus",
+  has typeLabel "BeadStatus",
+  has kind "entity",
+  has prefLabel "BeadStatus",
+  has definition "Where a bead stands: open, in_progress, blocked, deferred, closed or pinned.";
+put (resource: $r2, module: $module) isa inModule;
+
+put $r3 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#BeadType",
+  has iri "https://github.com/vibe-machine/ontology-beads#BeadType",
+  has typeLabel "BeadType",
+  has kind "entity",
+  has prefLabel "BeadType",
+  has definition "The kind of work a bead is: task, bug, feature, epic, chore, decision, spike, gate or wave.";
+put (resource: $r3, module: $module) isa inModule;
+
+put $r4 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#Priority",
+  has iri "https://github.com/vibe-machine/ontology-beads#Priority",
+  has typeLabel "Priority",
+  has kind "entity",
+  has prefLabel "Priority",
+  has definition "How urgent a bead is, from P0, the most urgent, to P4.";
+put (resource: $r4, module: $module) isa inModule;
+
+put $r5 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#BeadLabel",
+  has iri "https://github.com/vibe-machine/ontology-beads#BeadLabel",
+  has typeLabel "BeadLabel",
+  has kind "entity",
+  has prefLabel "BeadLabel",
+  has definition "A free-text label put on a bead to sort and find it, such as a plain label or one of our tvm: labels for components, waves and running agents.";
+put (resource: $r5, module: $module) isa inModule;
+
+put $r6 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#GateType",
+  has iri "https://github.com/vibe-machine/ontology-beads#GateType",
+  has typeLabel "GateType",
+  has kind "entity",
+  has prefLabel "GateType",
+  has definition "What a gate waits for: a person's decision (human), a timer, a GitHub run, a pull request, or another bead.";
+put (resource: $r6, module: $module) isa inModule;
+
+put $r7 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#HistoryEntryType",
+  has iri "https://github.com/vibe-machine/ontology-beads#HistoryEntryType",
+  has typeLabel "HistoryEntryType",
+  has kind "entity",
+  has prefLabel "HistoryEntryType",
+  has definition "What kind of change a history entry records, such as created, updated, claimed, status_changed, label_added, closed or reopened.";
+put (resource: $r7, module: $module) isa inModule;
+
+put $r8 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#Lease",
+  has iri "https://github.com/vibe-machine/ontology-beads#Lease",
+  has typeLabel "Lease",
+  has kind "entity",
+  has prefLabel "Lease",
+  has definition "A short-lived hold on an in-progress bead by the worker that claimed it. The worker keeps it alive with heartbeats; when it goes stale, beads reclaims the bead and puts it back to open.";
+put (resource: $r8, module: $module) isa inModule;
+
+put $r9 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#HistoryEntry",
+  has iri "https://github.com/vibe-machine/ontology-beads#HistoryEntry",
+  has typeLabel "HistoryEntry",
+  has kind "entity",
+  has prefLabel "HistoryEntry",
+  has definition "One entry in a bead's history: something that was done to the bead, by whom and when, such as created, claimed, status changed, label added, closed or reopened.";
+put (resource: $r9, module: $module) isa inModule;
+
+put $r10 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#Comment",
+  has iri "https://github.com/vibe-machine/ontology-beads#Comment",
+  has typeLabel "Comment",
+  has kind "entity",
+  has prefLabel "Comment",
+  has definition "A comment someone left on a bead, with its author, text and time.";
+put (resource: $r10, module: $module) isa inModule;
+
+put $r11 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#related",
+  has iri "https://github.com/vibe-machine/ontology-beads#related",
+  has typeLabel "related",
+  has kind "relation",
+  has prefLabel "related",
+  has definition "The related link: a two-way see-also between two beads that neither blocks nor nests.";
+put (resource: $r11, module: $module) isa inModule;
+
+put $r12 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#supersedes",
+  has iri "https://github.com/vibe-machine/ontology-beads#supersedes",
+  has typeLabel "supersedes",
+  has kind "relation",
+  has prefLabel "supersedes",
+  has definition "The supersedes link: a newer bead replaces an older one, which beads then closes.";
+put (resource: $r12, module: $module) isa inModule;
+
+put $r13 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#beadId",
+  has iri "https://github.com/vibe-machine/ontology-beads#beadId",
+  has typeLabel "beadId",
+  has kind "attribute",
+  has prefLabel "beadId",
+  has definition "The bead's id, such as one-12, which every beads command uses to name it, as a string.";
+put (resource: $r13, module: $module) isa inModule;
+
+put $r14 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#title",
+  has iri "https://github.com/vibe-machine/ontology-beads#title",
+  has typeLabel "title",
+  has kind "attribute",
+  has prefLabel "title",
+  has definition "The bead's short title, as a string.";
+put (resource: $r14, module: $module) isa inModule;
+
+put $r15 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#design",
+  has iri "https://github.com/vibe-machine/ontology-beads#design",
+  has typeLabel "design",
+  has kind "attribute",
+  has prefLabel "design",
+  has definition "How the work will be done, in free text, as a string.";
+put (resource: $r15, module: $module) isa inModule;
+
+put $r16 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#acceptanceCriteria",
+  has iri "https://github.com/vibe-machine/ontology-beads#acceptanceCriteria",
+  has typeLabel "acceptanceCriteria",
+  has kind "attribute",
+  has prefLabel "acceptanceCriteria",
+  has definition "What must be true for the bead to count as done, in free text, as a string.";
+put (resource: $r16, module: $module) isa inModule;
+
+put $r17 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#notes",
+  has iri "https://github.com/vibe-machine/ontology-beads#notes",
+  has typeLabel "notes",
+  has kind "attribute",
+  has prefLabel "notes",
+  has definition "Working notes kept on the bead, as a string.";
+put (resource: $r17, module: $module) isa inModule;
+
+put $r18 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#owner",
+  has iri "https://github.com/vibe-machine/ontology-beads#owner",
+  has typeLabel "owner",
+  has kind "attribute",
+  has prefLabel "owner",
+  has definition "The person who owns the bead, recorded as their git author email, as a string.";
+put (resource: $r18, module: $module) isa inModule;
+
+put $r19 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#assignee",
+  has iri "https://github.com/vibe-machine/ontology-beads#assignee",
+  has typeLabel "assignee",
+  has kind "attribute",
+  has prefLabel "assignee",
+  has definition "The person or agent who holds the bead now; claiming a bead sets it, as a string.";
+put (resource: $r19, module: $module) isa inModule;
+
+put $r20 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#createdAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#createdAt",
+  has typeLabel "createdAt",
+  has kind "attribute",
+  has prefLabel "createdAt",
+  has definition "When the bead, history entry or comment was created, as a datetime.";
+put (resource: $r20, module: $module) isa inModule;
+
+put $r21 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#updatedAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#updatedAt",
+  has typeLabel "updatedAt",
+  has kind "attribute",
+  has prefLabel "updatedAt",
+  has definition "When anything on the bead last changed, as a datetime.";
+put (resource: $r21, module: $module) isa inModule;
+
+put $r22 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#startedAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#startedAt",
+  has typeLabel "startedAt",
+  has kind "attribute",
+  has prefLabel "startedAt",
+  has definition "When the bead moved to in progress, as a datetime.";
+put (resource: $r22, module: $module) isa inModule;
+
+put $r23 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#closedAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#closedAt",
+  has typeLabel "closedAt",
+  has kind "attribute",
+  has prefLabel "closedAt",
+  has definition "When the bead was closed, as a datetime.";
+put (resource: $r23, module: $module) isa inModule;
+
+put $r24 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#closeReason",
+  has iri "https://github.com/vibe-machine/ontology-beads#closeReason",
+  has typeLabel "closeReason",
+  has kind "attribute",
+  has prefLabel "closeReason",
+  has definition "Why the bead was closed, given when closing it, as a string.";
+put (resource: $r24, module: $module) isa inModule;
+
+put $r25 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#priorityLevel",
+  has iri "https://github.com/vibe-machine/ontology-beads#priorityLevel",
+  has typeLabel "priorityLevel",
+  has kind "attribute",
+  has prefLabel "priorityLevel",
+  has definition "The number of a priority, 0 being most urgent, used to sort beads, as an integer.";
+put (resource: $r25, module: $module) isa inModule;
+
+put $r26 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#leaseHolder",
+  has iri "https://github.com/vibe-machine/ontology-beads#leaseHolder",
+  has typeLabel "leaseHolder",
+  has kind "attribute",
+  has prefLabel "leaseHolder",
+  has definition "The person or agent that holds the lease, as a string.";
+put (resource: $r26, module: $module) isa inModule;
+
+put $r27 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#grantedAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#grantedAt",
+  has typeLabel "grantedAt",
+  has kind "attribute",
+  has prefLabel "grantedAt",
+  has definition "When the lease was granted, which says how long the bead has been held, as a datetime.";
+put (resource: $r27, module: $module) isa inModule;
+
+put $r28 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#leaseExpiresAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#leaseExpiresAt",
+  has typeLabel "leaseExpiresAt",
+  has kind "attribute",
+  has prefLabel "leaseExpiresAt",
+  has definition "When the lease runs out unless the holder sends another heartbeat, as a datetime.";
+put (resource: $r28, module: $module) isa inModule;
+
+put $r29 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#heartbeatAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#heartbeatAt",
+  has typeLabel "heartbeatAt",
+  has kind "attribute",
+  has prefLabel "heartbeatAt",
+  has definition "When the holder last sent a heartbeat for the lease, as a datetime.";
+put (resource: $r29, module: $module) isa inModule;
+
+put $r30 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#actor",
+  has iri "https://github.com/vibe-machine/ontology-beads#actor",
+  has typeLabel "actor",
+  has kind "attribute",
+  has prefLabel "actor",
+  has definition "Who made the change a history entry records, a person or an agent, as a string.";
+put (resource: $r30, module: $module) isa inModule;
+
+put $r31 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#oldValue",
+  has iri "https://github.com/vibe-machine/ontology-beads#oldValue",
+  has typeLabel "oldValue",
+  has kind "attribute",
+  has prefLabel "oldValue",
+  has definition "The value before the change, such as the previous status, as a string.";
+put (resource: $r31, module: $module) isa inModule;
+
+put $r32 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#newValue",
+  has iri "https://github.com/vibe-machine/ontology-beads#newValue",
+  has typeLabel "newValue",
+  has kind "attribute",
+  has prefLabel "newValue",
+  has definition "The value after the change, such as the new status or the label added, as a string.";
+put (resource: $r32, module: $module) isa inModule;
+
+put $r33 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#author",
+  has iri "https://github.com/vibe-machine/ontology-beads#author",
+  has typeLabel "author",
+  has kind "attribute",
+  has prefLabel "author",
+  has definition "Who wrote the comment, as a string.";
+put (resource: $r33, module: $module) isa inModule;
+
+put $r34 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#commentText",
+  has iri "https://github.com/vibe-machine/ontology-beads#commentText",
+  has typeLabel "commentText",
+  has kind "attribute",
+  has prefLabel "commentText",
+  has definition "What the comment says, as a string.";
+put (resource: $r34, module: $module) isa inModule;
+
+# -- BEGIN GENERATED STRUCTURAL METADATA --
+# Generated from authoritative schema definitions. Do not hand-edit this section.
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "Task";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "beadId";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "title";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "description";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "design";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "acceptanceCriteria";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "notes";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "owner";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "assignee";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "updatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "startedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "closedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "closeReason";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadStatus";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadStatus";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadType";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadType";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Priority";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Priority";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Priority";
+  $struct_right isa SchemaResource, has typeLabel "priorityLevel";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadLabel";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadLabel";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "GateType";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "GateType";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntryType";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntryType";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "Assignment";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "leaseHolder";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "grantedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "leaseExpiresAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "heartbeatAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "ContentExpression";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "actor";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "oldValue";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "newValue";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Comment";
+  $struct_right isa SchemaResource, has typeLabel "ContentExpression";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Comment";
+  $struct_right isa SchemaResource, has typeLabel "author";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Comment";
+  $struct_right isa SchemaResource, has typeLabel "commentText";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Comment";
+  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "related";
+  $struct_right isa SchemaResource, has typeLabel "isConnectedTo";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "supersedes";
+  $struct_right isa SchemaResource, has typeLabel "isBasedOn";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+# -- END GENERATED STRUCTURAL METADATA --

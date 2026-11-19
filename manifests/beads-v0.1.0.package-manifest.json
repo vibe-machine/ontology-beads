@@ -1,0 +1,60 @@
+{
+  "$schema": "./package-manifest.schema.json",
+  "manifestVersion": "1.0.0",
+  "package": {
+    "name": "beads",
+    "version": "0.1.0"
+  },
+  "upstream": {
+    "repoUrl": "https://github.com/vibe-machine/ontology-beads",
+    "tag": "v0.1.0",
+    "commit": "unpublished",
+    "sourceArtifacts": [
+      {
+        "path": "package.json",
+        "sha256": "3d9929d69d4ec457ade1b303391ba7e0544f65171ea56096c77f5e47abba5c37"
+      },
+      {
+        "path": "schema/beads.tql",
+        "sha256": "8af819f563d8703f7d1ce322efdf744d313b792ef7e71cdf118c59a6f164cf94"
+      }
+    ]
+  },
+  "generator": {
+    "name": "lingo-lab-package",
+    "version": "1.0.0",
+    "generatedAt": "2026-11-19T18:51:37Z"
+  },
+  "artifacts": [
+    {
+      "kind": "meta-schema",
+      "path": "schema/self-describing-schema.tql",
+      "sha256": "f9a0a8e164ed416ec7b499ab88833e79b520b51691f4280aa8ed058cb8d8a7d1"
+    },
+    {
+      "kind": "provenance-schema",
+      "path": "schema/package-provenance.tql",
+      "sha256": "a0b2a08eb5cfe48ae33cf644b8b4cd1ea495589e38a9a61b888cae9199f41fbd"
+    },
+    {
+      "kind": "administrative-schema",
+      "path": "schema/administrative-operations.tql",
+      "sha256": "45052da7223c147b3690b293f5485dd833d93461d052e6cc2812cdb8e0301f65"
+    },
+    {
+      "kind": "documentation",
+      "path": "data/beads-schema-docs.tql",
+      "sha256": "7dd9082345ffaf8b44918cf962709e93dbbfecb5b1c1223d19362d49e34cf480"
+    },
+    {
+      "kind": "manifest-schema",
+      "path": "manifests/package-manifest.schema.json",
+      "sha256": "07599fe20623f3304bec0987320050f12efc1faf04fad7c12176ffe88e0b6a48"
+    },
+    {
+      "kind": "provenance-seeds",
+      "path": "data/beads-provenance.tql",
+      "sha256": "90ebec100a3d53eadebe919767cada0d5dd7b17c75756d090e4a89ba6f9fea37"
+    }
+  ]
+}

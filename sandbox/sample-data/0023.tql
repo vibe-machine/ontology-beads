@@ -1,0 +1,1 @@
+match $child isa Bead, has beadId "one-5"; $parent isa Bead, has beadId "one-2"; insert isPartOf (part: $child, whole: $parent);

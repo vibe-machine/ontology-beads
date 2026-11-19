@@ -1,0 +1,65 @@
+# Provenance bootstrap
+# upstream-repo: https://github.com/vibe-machine/ontology-beads
+# upstream-tag: v0.1.0
+# upstream-commit: unpublished
+# source-artifacts:
+# - package.json
+# - schema/beads.tql
+# manifest: manifests/beads-v0.1.0.package-manifest.json
+# generator: lingo-lab-package/1.0.0
+define
+
+attribute moduleName, value string;
+attribute moduleRepoUrl, value string;
+attribute moduleVersionKey, value string;
+attribute moduleVersion, value string;
+attribute upstreamCommit, value string;
+attribute manifestPath, value string;
+attribute generatorName, value string;
+attribute generatorVersion, value string;
+attribute generatedAt, value string;
+attribute sourcePath, value string;
+attribute sourceSha256, value string;
+attribute artifactPath, value string;
+attribute artifactKind, value string;
+attribute artifactSha256, value string;
+
+entity OntologyModule sub SchemaMetaData,
+    owns moduleName,
+    owns moduleRepoUrl @key,
+    plays ontologyModuleVersionOf:module;
+
+entity OntologyModuleVersion sub SchemaMetaData,
+    owns moduleVersionKey @key,
+    owns moduleVersion,
+    owns upstreamCommit,
+    owns manifestPath,
+    owns generatorName,
+    owns generatorVersion,
+    owns generatedAt,
+    plays ontologyModuleVersionOf:version,
+    plays ontologyModuleVersionBasedOnSourceArtifact:version,
+    plays generatedArtifactForOntologyModuleVersion:version;
+
+entity SourceArtifactRecord sub SchemaMetaData,
+    owns sourcePath,
+    owns sourceSha256,
+    plays ontologyModuleVersionBasedOnSourceArtifact:sourceArtifact;
+
+entity GeneratedArtifactRecord sub SchemaMetaData,
+    owns artifactPath,
+    owns artifactKind,
+    owns artifactSha256,
+    plays generatedArtifactForOntologyModuleVersion:generatedArtifact;
+
+relation ontologyModuleVersionOf sub isBasedOn,
+    relates version as derivedThing,
+    relates module as basis;
+
+relation ontologyModuleVersionBasedOnSourceArtifact sub isBasedOn,
+    relates version as derivedThing,
+    relates sourceArtifact as basis;
+
+relation generatedArtifactForOntologyModuleVersion sub isAbout,
+    relates generatedArtifact as content,
+    relates version as subjectMatter;

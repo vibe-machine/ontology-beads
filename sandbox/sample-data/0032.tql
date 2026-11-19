@@ -1,0 +1,1 @@
+match $first isa Bead, has beadId "one-17"; $second isa Bead, has beadId "one-13"; insert related (relatedBead: $first, relatedBead: $second);

@@ -1,0 +1,1 @@
+match $bead isa Bead, has beadId "one-14"; insert $lease isa Lease, has leaseHolder "agent-3", has grantedAt 2026-11-18T09:00:00, has heartbeatAt 2026-11-18T09:20:00, has leaseExpiresAt 2026-11-18T09:25:00; isAssignmentTo (assignment: $lease, assignmentTarget: $bead);
