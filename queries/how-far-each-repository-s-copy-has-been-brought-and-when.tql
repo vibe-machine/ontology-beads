@@ -1,0 +1,9 @@
+# Up to which change has each repository's copy been brought, and when?
+# Reads, for each repository, the bead database commit it was last copied up to, the content fingerprint at that moment, and when that copy finished.
+match
+  $repo isa BeadRepository, has name $repository;
+  $repo has lastCopiedCommit $commit;
+  $repo has lastCopiedFingerprint $fingerprint;
+  $repo has lastCopiedAt $copiedAt;
+select $repository, $commit, $fingerprint, $copiedAt;
+sort $repository asc;

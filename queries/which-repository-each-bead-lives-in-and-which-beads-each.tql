@@ -1,0 +1,9 @@
+# Which bead repository does this bead live in, and which beads does a repository hold?
+# Lists every repository with its folder and bead database, and each bead that is a member of it; the same id (one-4) shows up under two repositories, so a bead is named by repository and id together.
+match
+  $repo isa BeadRepository, has name $repository;
+  $repo has folderPath $folder, has beadDatabaseName $database;
+  isMemberOf (member: $bead, collection: $repo);
+  $bead has beadId $id, has title $title;
+select $repository, $folder, $database, $id, $title;
+sort $repository asc, $id asc;

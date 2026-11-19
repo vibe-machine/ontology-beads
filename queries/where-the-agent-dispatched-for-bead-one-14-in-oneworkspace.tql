@@ -1,0 +1,12 @@
+# Where does the agent dispatched for this bead run: which terminal session, which work folder, which branch, and which process?
+# Finds bead one-14 within the OneWorkspace repository and reads the terminal socket and session, work folder, base branch and process id Supervise wrote on it.
+match
+  $repo isa BeadRepository, has name "OneWorkspace";
+  $bead isa Bead, has beadId "one-14";
+  isMemberOf (member: $bead, collection: $repo);
+  $bead has tmuxSocket $terminalSocket;
+  $bead has tmuxSession $terminalSession;
+  $bead has worktreePath $workFolder;
+  $bead has baseBranch $branch;
+  $bead has agentPid $processId;
+select $terminalSocket, $terminalSession, $workFolder, $branch, $processId;

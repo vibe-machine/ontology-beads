@@ -22,6 +22,6 @@ The questions Beads is meant to answer, and the query that answers each one. Ins
 18. What happened to this bead and when, and who did it: created, claimed, status changed, labelled, closed, reopened? — [`queries/what-happened-to-bead-one-3-when-and-who-did-it.tql`](what-happened-to-bead-one-3-when-and-who-did-it.tql)
 19. What comments are on this bead, and by whom? — [`queries/what-comments-are-on-bead-one-5-and-by-whom.tql`](what-comments-are-on-bead-one-5-and-by-whom.tql)
 20. Which beads belong to a wave, which wave, and what state is the wave in? — [`queries/which-beads-belong-to-which-wave-and-the-wave-s-state.tql`](which-beads-belong-to-which-wave-and-the-wave-s-state.tql)
-21. Which bead repository does this bead live in, and which beads does a repository hold? — no query yet
-22. Up to which change has each repository's copy been brought, and when? — no query yet
-23. Where does the agent dispatched for this bead run: which terminal session, which work folder, which branch, and which process? — no query yet
+21. Which bead repository does this bead live in, and which beads does a repository hold? — [`queries/which-repository-each-bead-lives-in-and-which-beads-each.tql`](which-repository-each-bead-lives-in-and-which-beads-each.tql)
+22. Up to which change has each repository's copy been brought, and when? — [`queries/how-far-each-repository-s-copy-has-been-brought-and-when.tql`](how-far-each-repository-s-copy-has-been-brought-and-when.tql)
+23. Where does the agent dispatched for this bead run: which terminal session, which work folder, which branch, and which process? — [`queries/where-the-agent-dispatched-for-bead-one-14-in-oneworkspace.tql`](where-the-agent-dispatched-for-bead-one-14-in-oneworkspace.tql)

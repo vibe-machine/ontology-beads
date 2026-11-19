@@ -138,6 +138,27 @@ update
   $query20 has storedPackage "beads";
   $query20 has storedVersion "0.1.1";
   $query20 has storedQueryExplanation "Finds beads of type wave, reads the state from their tvm:wave= label, and lists the beads that are members of each wave.";
+put $query21 isa StoredQuery, has storedQueryName "beads/which-repository-each-bead-lives-in-and-which-beads-each";
+update
+  $query21 has storedQueryTitle "Which repository each bead lives in, and which beads each repository holds";
+  $query21 has storedQueryText "match\n  $repo isa BeadRepository, has name $repository;\n  $repo has folderPath $folder, has beadDatabaseName $database;\n  isMemberOf (member: $bead, collection: $repo);\n  $bead has beadId $id, has title $title;\nselect $repository, $folder, $database, $id, $title;\nsort $repository asc, $id asc;";
+  $query21 has storedPackage "beads";
+  $query21 has storedVersion "0.1.1";
+  $query21 has storedQueryExplanation "Lists every repository with its folder and bead database, and each bead that is a member of it; the same id (one-4) shows up under two repositories, so a bead is named by repository and id together.";
+put $query22 isa StoredQuery, has storedQueryName "beads/how-far-each-repository-s-copy-has-been-brought-and-when";
+update
+  $query22 has storedQueryTitle "How far each repository's copy has been brought, and when";
+  $query22 has storedQueryText "match\n  $repo isa BeadRepository, has name $repository;\n  $repo has lastCopiedCommit $commit;\n  $repo has lastCopiedFingerprint $fingerprint;\n  $repo has lastCopiedAt $copiedAt;\nselect $repository, $commit, $fingerprint, $copiedAt;\nsort $repository asc;";
+  $query22 has storedPackage "beads";
+  $query22 has storedVersion "0.1.1";
+  $query22 has storedQueryExplanation "Reads, for each repository, the bead database commit it was last copied up to, the content fingerprint at that moment, and when that copy finished.";
+put $query23 isa StoredQuery, has storedQueryName "beads/where-the-agent-dispatched-for-bead-one-14-in-oneworkspace";
+update
+  $query23 has storedQueryTitle "Where the agent dispatched for bead one-14 in OneWorkspace runs";
+  $query23 has storedQueryText "match\n  $repo isa BeadRepository, has name \"OneWorkspace\";\n  $bead isa Bead, has beadId \"one-14\";\n  isMemberOf (member: $bead, collection: $repo);\n  $bead has tmuxSocket $terminalSocket;\n  $bead has tmuxSession $terminalSession;\n  $bead has worktreePath $workFolder;\n  $bead has baseBranch $branch;\n  $bead has agentPid $processId;\nselect $terminalSocket, $terminalSession, $workFolder, $branch, $processId;";
+  $query23 has storedPackage "beads";
+  $query23 has storedVersion "0.1.1";
+  $query23 has storedQueryExplanation "Finds bead one-14 within the OneWorkspace repository and reads the terminal socket and session, work folder, base branch and process id Supervise wrote on it.";
 put $question1 isa StoredQuestion, has storedQuestionId "beads/q-01";
 update
   $question1 has storedQuestionText "What is recorded about this bead: its title, description, design, acceptance criteria, notes, type, status and priority?";
@@ -284,15 +305,18 @@ update
   $question21 has storedPackage "beads";
   $question21 has storedVersion "0.1.1";
   $question21 has storedQuestionOrder 21;
+put storedAnswer (question: $question21, query: $query21);
 put $question22 isa StoredQuestion, has storedQuestionId "beads/q-22";
 update
   $question22 has storedQuestionText "Up to which change has each repository's copy been brought, and when?";
   $question22 has storedPackage "beads";
   $question22 has storedVersion "0.1.1";
   $question22 has storedQuestionOrder 22;
+put storedAnswer (question: $question22, query: $query22);
 put $question23 isa StoredQuestion, has storedQuestionId "beads/q-23";
 update
   $question23 has storedQuestionText "Where does the agent dispatched for this bead run: which terminal session, which work folder, which branch, and which process?";
   $question23 has storedPackage "beads";
   $question23 has storedVersion "0.1.1";
   $question23 has storedQuestionOrder 23;
+put storedAnswer (question: $question23, query: $query23);
