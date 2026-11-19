@@ -1,0 +1,8 @@
+# Which beads carry a given label, or any one of several labels?
+# Matches beads with any one of the listed labels; keep a single branch to search for one label only.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $bead, category: $label);
+  $label isa BeadLabel, has name $labelName;
+  { $labelName == "ux"; } or { $labelName == "backend"; };
+select $id, $title, $labelName;

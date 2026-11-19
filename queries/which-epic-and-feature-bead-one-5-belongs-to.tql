@@ -1,0 +1,10 @@
+# Which epic and which feature does this bead belong to?
+# Walks up from bead one-5 through its parents with the ancestors function and keeps those whose type is epic or feature.
+match
+  $bead isa Bead, has beadId "one-5";
+  let $ancestor in ancestors($bead);
+  $ancestor has beadId $ancestorId, has title $ancestorTitle;
+  isCategorizedBy (categorizedThing: $ancestor, category: $type);
+  $type isa BeadType, has name $typeName;
+  { $typeName == "epic"; } or { $typeName == "feature"; };
+select $typeName, $ancestorId, $ancestorTitle;

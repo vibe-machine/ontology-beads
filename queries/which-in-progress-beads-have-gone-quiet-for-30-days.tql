@@ -1,0 +1,10 @@
+# Which beads are marked in progress but have gone quiet for a number of days?
+# Keeps in-progress beads whose last change is before a cut-off date, here 30 days before 2026-11-19; change the date to change the number of days.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $bead, category: $status);
+  $status isa BeadStatus, has name "in_progress";
+  $bead has updatedAt $lastChanged;
+  $lastChanged < 2026-10-20T00:00:00;
+  try { $bead has assignee $holder; };
+select $id, $title, $holder, $lastChanged;

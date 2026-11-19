@@ -1,0 +1,16 @@
+# What is recorded about this bead: its title, description, design, acceptance criteria, notes, type, status and priority?
+# Finds bead one-3 and reads its text fields, then follows its categories to get its type, status and priority.
+match
+  $bead isa Bead, has beadId "one-3";
+  $bead has title $title;
+  $bead has description $description;
+  $bead has design $design;
+  $bead has acceptanceCriteria $acceptanceCriteria;
+  $bead has notes $notes;
+  isCategorizedBy (categorizedThing: $bead, category: $type);
+  $type isa BeadType, has name $typeName;
+  isCategorizedBy (categorizedThing: $bead, category: $status);
+  $status isa BeadStatus, has name $statusName;
+  isCategorizedBy (categorizedThing: $bead, category: $priority);
+  $priority isa Priority, has name $priorityName;
+select $title, $description, $design, $acceptanceCriteria, $notes, $typeName, $statusName, $priorityName;

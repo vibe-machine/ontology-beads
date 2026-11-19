@@ -1,0 +1,12 @@
+# Which open bugs are at priority 0 or 1?
+# Keeps beads of type bug with status open whose priority level is at most 1.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $bead, category: $type);
+  $type isa BeadType, has name "bug";
+  isCategorizedBy (categorizedThing: $bead, category: $status);
+  $status isa BeadStatus, has name "open";
+  isCategorizedBy (categorizedThing: $bead, category: $priority);
+  $priority isa Priority, has name $priorityName, has priorityLevel $level;
+  $level <= 1;
+select $id, $title, $priorityName;

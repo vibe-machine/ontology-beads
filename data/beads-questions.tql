@@ -1,87 +1,199 @@
+put $query1 isa StoredQuery, has storedQueryName "beads/what-is-recorded-about-bead-one-3";
+update
+  $query1 has storedQueryTitle "What is recorded about bead one-3";
+  $query1 has storedQueryText "match\n  $bead isa Bead, has beadId \"one-3\";\n  $bead has title $title;\n  $bead has description $description;\n  $bead has design $design;\n  $bead has acceptanceCriteria $acceptanceCriteria;\n  $bead has notes $notes;\n  isCategorizedBy (categorizedThing: $bead, category: $type);\n  $type isa BeadType, has name $typeName;\n  isCategorizedBy (categorizedThing: $bead, category: $status);\n  $status isa BeadStatus, has name $statusName;\n  isCategorizedBy (categorizedThing: $bead, category: $priority);\n  $priority isa Priority, has name $priorityName;\nselect $title, $description, $design, $acceptanceCriteria, $notes, $typeName, $statusName, $priorityName;";
+  $query1 has storedPackage "beads";
+  $query1 has storedVersion "0.1.0";
+  $query1 has storedQueryExplanation "Finds bead one-3 and reads its text fields, then follows its categories to get its type, status and priority.";
+put $query2 isa StoredQuery, has storedQueryName "beads/who-owns-and-holds-bead-one-3-its-key-times-and-close-reason";
+update
+  $query2 has storedQueryTitle "Who owns and holds bead one-3, its key times and close reason";
+  $query2 has storedQueryText "match\n  $bead isa Bead, has beadId \"one-3\";\n  $bead has owner $owner;\n  $bead has assignee $holder;\n  $bead has createdAt $createdAt;\n  $bead has startedAt $startedAt;\n  $bead has closedAt $closedAt;\n  $bead has closeReason $closeReason;\nselect $owner, $holder, $createdAt, $startedAt, $closedAt, $closeReason;";
+  $query2 has storedPackage "beads";
+  $query2 has storedVersion "0.1.0";
+  $query2 has storedQueryExplanation "Finds bead one-3 and reads its owner, its holder (assignee), when it was created, started and closed, and why it was closed.";
+put $query3 isa StoredQuery, has storedQueryName "beads/which-beads-are-ready-to-start-most-urgent-first";
+update
+  $query3 has storedQueryTitle "Which beads are ready to start, most urgent first";
+  $query3 has storedQueryText "match\n  $bead isa Bead, has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $bead, category: $status);\n  $status isa BeadStatus, has name \"open\";\n  isCategorizedBy (categorizedThing: $bead, category: $priority);\n  $priority isa Priority, has priorityLevel $level;\n  not { let $blocker in openBlockers($bead); };\n  not {\n    let $ancestor in ancestors($bead);\n    let $ancestorBlocker in openBlockers($ancestor);\n  };\nselect $id, $title, $level;\nsort $level asc;";
+  $query3 has storedPackage "beads";
+  $query3 has storedVersion "0.1.0";
+  $query3 has storedQueryExplanation "Keeps open beads that have no open blocker themselves and none on any bead above them (openBlockers and ancestors are functions in the package), then sorts by priority level, 0 first.";
+put $query4 isa StoredQuery, has storedQueryName "beads/which-beads-are-blocked-and-by-which-open-beads";
+update
+  $query4 has storedQueryTitle "Which beads are blocked, and by which open beads";
+  $query4 has storedQueryText "match\n  $bead isa Bead, has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $bead, category: $status);\n  $status isa BeadStatus, has name $statusName;\n  $statusName != \"closed\";\n  $statusName != \"pinned\";\n  let $blocker in openBlockers($bead);\n  $blocker has beadId $blockerId, has title $blockerTitle;\nselect $id, $title, $blockerId, $blockerTitle;";
+  $query4 has storedPackage "beads";
+  $query4 has storedVersion "0.1.0";
+  $query4 has storedQueryExplanation "Takes every bead that is not closed or pinned and lists each of its blockers that is itself not closed or pinned.";
+put $query5 isa StoredQuery, has storedQueryName "beads/what-finishing-bead-one-13-unblocks";
+update
+  $query5 has storedQueryTitle "What finishing bead one-13 unblocks";
+  $query5 has storedQueryText "match\n  $bead isa Bead, has beadId \"one-13\";\n  precedes (predecessor: $bead, successor: $waiting);\n  $waiting has beadId $waitingId, has title $waitingTitle;\nselect $waitingId, $waitingTitle;";
+  $query5 has storedPackage "beads";
+  $query5 has storedVersion "0.1.0";
+  $query5 has storedQueryExplanation "Follows the blocks links out of bead one-13 to the beads waiting on it.";
+put $query6 isa StoredQuery, has storedQueryName "beads/which-beads-wait-on-a-person-s-approval-and-which-approvals";
+update
+  $query6 has storedQueryTitle "Which beads wait on a person's approval, and which approvals are open";
+  $query6 has storedQueryText "match\n  $gate isa Bead, has beadId $gateId, has title $gateTitle;\n  isCategorizedBy (categorizedThing: $gate, category: $gateType);\n  $gateType isa GateType, has name \"human\";\n  isCategorizedBy (categorizedThing: $gate, category: $status);\n  $status isa BeadStatus, has name $gateStatus;\n  precedes (predecessor: $gate, successor: $waiter);\n  $waiter has beadId $waiterId, has title $waiterTitle;\nselect $gateId, $gateTitle, $gateStatus, $waiterId, $waiterTitle;";
+  $query6 has storedPackage "beads";
+  $query6 has storedVersion "0.1.0";
+  $query6 has storedQueryExplanation "Finds gates whose gate type is human, shows whether each is still open, and lists the beads each one blocks.";
+put $query7 isa StoredQuery, has storedQueryName "beads/which-beads-are-being-worked-on-now-and-who-holds-each";
+update
+  $query7 has storedQueryTitle "Which beads are being worked on now, and who holds each";
+  $query7 has storedQueryText "match\n  $bead isa Bead, has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $bead, category: $status);\n  $status isa BeadStatus, has name \"in_progress\";\n  try { $bead has assignee $holder; };\n  try {\n    isAssignmentTo (assignment: $lease, assignmentTarget: $bead);\n    $lease isa Lease, has leaseHolder $leaseHolder, has heartbeatAt $lastHeartbeat, has leaseExpiresAt $leaseExpiresAt;\n  };\nselect $id, $title, $holder, $leaseHolder, $lastHeartbeat, $leaseExpiresAt;";
+  $query7 has storedPackage "beads";
+  $query7 has storedVersion "0.1.0";
+  $query7 has storedQueryExplanation "Lists in-progress beads with their holder and, where the bead has a lease, the lease holder, last heartbeat and expiry; the try blocks keep beads that have no holder or lease.";
+put $query8 isa StoredQuery, has storedQueryName "beads/which-in-progress-beads-have-gone-quiet-for-30-days";
+update
+  $query8 has storedQueryTitle "Which in-progress beads have gone quiet for 30 days";
+  $query8 has storedQueryText "match\n  $bead isa Bead, has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $bead, category: $status);\n  $status isa BeadStatus, has name \"in_progress\";\n  $bead has updatedAt $lastChanged;\n  $lastChanged < 2026-10-20T00:00:00;\n  try { $bead has assignee $holder; };\nselect $id, $title, $holder, $lastChanged;";
+  $query8 has storedPackage "beads";
+  $query8 has storedVersion "0.1.0";
+  $query8 has storedQueryExplanation "Keeps in-progress beads whose last change is before a cut-off date, here 30 days before 2026-11-19; change the date to change the number of days.";
+put $query9 isa StoredQuery, has storedQueryName "beads/what-is-under-epic-one-1-at-every-level-and-its-status";
+update
+  $query9 has storedQueryTitle "What is under epic one-1 at every level, and its status";
+  $query9 has storedQueryText "match\n  $epic isa Bead, has beadId \"one-1\";\n  let $descendant in descendants($epic);\n  $descendant has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $descendant, category: $type);\n  $type isa BeadType, has name $typeName;\n  isCategorizedBy (categorizedThing: $descendant, category: $status);\n  $status isa BeadStatus, has name $statusName;\nselect $id, $title, $typeName, $statusName;";
+  $query9 has storedPackage "beads";
+  $query9 has storedVersion "0.1.0";
+  $query9 has storedQueryExplanation "Uses the descendants function to walk the parent-child links down from epic one-1 at any depth, and shows each bead's type and status; the rows with status closed are the closed share.";
+put $query10 isa StoredQuery, has storedQueryName "beads/which-epic-and-feature-bead-one-5-belongs-to";
+update
+  $query10 has storedQueryTitle "Which epic and feature bead one-5 belongs to";
+  $query10 has storedQueryText "match\n  $bead isa Bead, has beadId \"one-5\";\n  let $ancestor in ancestors($bead);\n  $ancestor has beadId $ancestorId, has title $ancestorTitle;\n  isCategorizedBy (categorizedThing: $ancestor, category: $type);\n  $type isa BeadType, has name $typeName;\n  { $typeName == \"epic\"; } or { $typeName == \"feature\"; };\nselect $typeName, $ancestorId, $ancestorTitle;";
+  $query10 has storedPackage "beads";
+  $query10 has storedVersion "0.1.0";
+  $query10 has storedQueryExplanation "Walks up from bead one-5 through its parents with the ancestors function and keeps those whose type is epic or feature.";
+put $query11 isa StoredQuery, has storedQueryName "beads/which-component-bead-one-5-belongs-to";
+update
+  $query11 has storedQueryTitle "Which component bead one-5 belongs to";
+  $query11 has storedQueryText "match\n  $bead isa Bead, has beadId \"one-5\";\n  let $ancestor in ancestors($bead);\n  isCategorizedBy (categorizedThing: $ancestor, category: $label);\n  $label isa BeadLabel, has name $component;\n  $component like \"^tvm:component:\";\n  $ancestor has beadId $epicId;\nselect $component, $epicId;";
+  $query11 has storedPackage "beads";
+  $query11 has storedVersion "0.1.0";
+  $query11 has storedQueryExplanation "Walks up from bead one-5 through its parents and returns the tvm:component: label found on the epic above it.";
+put $query12 isa StoredQuery, has storedQueryName "beads/which-beads-break-our-tree-rules";
+update
+  $query12 has storedQueryTitle "Which beads break our tree rules";
+  $query12 has storedQueryText "match\n  $bead isa Bead, has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $bead, category: $type);\n  $type isa BeadType, has name $typeName;\n  {\n    { $typeName == \"task\"; } or { $typeName == \"bug\"; };\n    isPartOf (part: $bead, whole: $epicParent);\n    isCategorizedBy (categorizedThing: $epicParent, category: $epicParentType);\n    $epicParentType isa BeadType, has name \"epic\";\n  } or {\n    $typeName == \"feature\";\n    isPartOf (part: $bead, whole: $featureParent);\n    isCategorizedBy (categorizedThing: $featureParent, category: $featureParentType);\n    $featureParentType isa BeadType, has name \"feature\";\n  } or {\n    $typeName == \"epic\";\n    isCategorizedBy (categorizedThing: $bead, category: $epicStatus);\n    $epicStatus isa BeadStatus, has name $epicStatusName;\n    $epicStatusName != \"closed\";\n    isPartOf (part: $closedChild, whole: $bead);\n    not {\n      isPartOf (part: $openChild, whole: $bead);\n      isCategorizedBy (categorizedThing: $openChild, category: $childStatus);\n      $childStatus isa BeadStatus, has name $childStatusName;\n      $childStatusName != \"closed\";\n    };\n  };\nselect $id, $title, $typeName;";
+  $query12 has storedPackage "beads";
+  $query12 has storedVersion "0.1.0";
+  $query12 has storedQueryExplanation "Three alternatives joined with or: a task or bug whose direct parent is an epic, a feature whose direct parent is a feature, and an epic that is not closed while none of its direct children is still open.";
+put $query13 isa StoredQuery, has storedQueryName "beads/which-beads-carry-the-label-ux-or-backend";
+update
+  $query13 has storedQueryTitle "Which beads carry the label ux or backend";
+  $query13 has storedQueryText "match\n  $bead isa Bead, has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $bead, category: $label);\n  $label isa BeadLabel, has name $labelName;\n  { $labelName == \"ux\"; } or { $labelName == \"backend\"; };\nselect $id, $title, $labelName;";
+  $query13 has storedPackage "beads";
+  $query13 has storedVersion "0.1.0";
+  $query13 has storedQueryExplanation "Matches beads with any one of the listed labels; keep a single branch to search for one label only.";
+put $query14 isa StoredQuery, has storedQueryName "beads/which-open-bugs-are-at-priority-0-or-1";
+update
+  $query14 has storedQueryTitle "Which open bugs are at priority 0 or 1";
+  $query14 has storedQueryText "match\n  $bead isa Bead, has beadId $id, has title $title;\n  isCategorizedBy (categorizedThing: $bead, category: $type);\n  $type isa BeadType, has name \"bug\";\n  isCategorizedBy (categorizedThing: $bead, category: $status);\n  $status isa BeadStatus, has name \"open\";\n  isCategorizedBy (categorizedThing: $bead, category: $priority);\n  $priority isa Priority, has name $priorityName, has priorityLevel $level;\n  $level <= 1;\nselect $id, $title, $priorityName;";
+  $query14 has storedPackage "beads";
+  $query14 has storedVersion "0.1.0";
+  $query14 has storedQueryExplanation "Keeps beads of type bug with status open whose priority level is at most 1.";
 put $question1 isa StoredQuestion, has storedQuestionId "beads/q-01";
 update
   $question1 has storedQuestionText "What is recorded about this bead: its title, description, design, acceptance criteria, notes, type, status and priority?";
   $question1 has storedPackage "beads";
   $question1 has storedVersion "0.1.0";
   $question1 has storedQuestionOrder 1;
+put storedAnswer (question: $question1, query: $query1);
 put $question2 isa StoredQuestion, has storedQuestionId "beads/q-02";
 update
   $question2 has storedQuestionText "Who owns this bead, who holds it now, when was it created, started and closed, and why was it closed?";
   $question2 has storedPackage "beads";
   $question2 has storedVersion "0.1.0";
   $question2 has storedQuestionOrder 2;
+put storedAnswer (question: $question2, query: $query2);
 put $question3 isa StoredQuestion, has storedQuestionId "beads/q-03";
 update
   $question3 has storedQuestionText "Which beads are ready to start: open, nothing open in front of them, most urgent first?";
   $question3 has storedPackage "beads";
   $question3 has storedVersion "0.1.0";
   $question3 has storedQuestionOrder 3;
+put storedAnswer (question: $question3, query: $query3);
 put $question4 isa StoredQuestion, has storedQuestionId "beads/q-04";
 update
   $question4 has storedQuestionText "Which beads are blocked, and by which open beads?";
   $question4 has storedPackage "beads";
   $question4 has storedVersion "0.1.0";
   $question4 has storedQuestionOrder 4;
+put storedAnswer (question: $question4, query: $query4);
 put $question5 isa StoredQuestion, has storedQuestionId "beads/q-05";
 update
   $question5 has storedQuestionText "What does finishing this bead unblock?";
   $question5 has storedPackage "beads";
   $question5 has storedVersion "0.1.0";
   $question5 has storedQuestionOrder 5;
+put storedAnswer (question: $question5, query: $query5);
 put $question6 isa StoredQuestion, has storedQuestionId "beads/q-06";
 update
   $question6 has storedQuestionText "Which beads wait on a person's approval, and which approvals are still open?";
   $question6 has storedPackage "beads";
   $question6 has storedVersion "0.1.0";
   $question6 has storedQuestionOrder 6;
+put storedAnswer (question: $question6, query: $query6);
 put $question7 isa StoredQuestion, has storedQuestionId "beads/q-07";
 update
   $question7 has storedQuestionText "Which beads are being worked on right now, and who or which agent holds each one?";
   $question7 has storedPackage "beads";
   $question7 has storedVersion "0.1.0";
   $question7 has storedQuestionOrder 7;
+put storedAnswer (question: $question7, query: $query7);
 put $question8 isa StoredQuestion, has storedQuestionId "beads/q-08";
 update
   $question8 has storedQuestionText "Which beads are marked in progress but have gone quiet for a number of days?";
   $question8 has storedPackage "beads";
   $question8 has storedVersion "0.1.0";
   $question8 has storedQuestionOrder 8;
+put storedAnswer (question: $question8, query: $query8);
 put $question9 isa StoredQuestion, has storedQuestionId "beads/q-09";
 update
   $question9 has storedQuestionText "What is under this epic, at every level, and how much of it is closed?";
   $question9 has storedPackage "beads";
   $question9 has storedVersion "0.1.0";
   $question9 has storedQuestionOrder 9;
+put storedAnswer (question: $question9, query: $query9);
 put $question10 isa StoredQuestion, has storedQuestionId "beads/q-10";
 update
   $question10 has storedQuestionText "Which epic and which feature does this bead belong to?";
   $question10 has storedPackage "beads";
   $question10 has storedVersion "0.1.0";
   $question10 has storedQuestionOrder 10;
+put storedAnswer (question: $question10, query: $query10);
 put $question11 isa StoredQuestion, has storedQuestionId "beads/q-11";
 update
   $question11 has storedQuestionText "Which component does this bead belong to?";
   $question11 has storedPackage "beads";
   $question11 has storedVersion "0.1.0";
   $question11 has storedQuestionOrder 11;
+put storedAnswer (question: $question11, query: $query11);
 put $question12 isa StoredQuestion, has storedQuestionId "beads/q-12";
 update
   $question12 has storedQuestionText "Which beads break our tree rules: a task or bug directly under an epic, a feature under a feature, or an epic still open though every child is closed?";
   $question12 has storedPackage "beads";
   $question12 has storedVersion "0.1.0";
   $question12 has storedQuestionOrder 12;
+put storedAnswer (question: $question12, query: $query12);
 put $question13 isa StoredQuestion, has storedQuestionId "beads/q-13";
 update
   $question13 has storedQuestionText "Which beads carry a given label, or any one of several labels?";
   $question13 has storedPackage "beads";
   $question13 has storedVersion "0.1.0";
   $question13 has storedQuestionOrder 13;
+put storedAnswer (question: $question13, query: $query13);
 put $question14 isa StoredQuestion, has storedQuestionId "beads/q-14";
 update
   $question14 has storedQuestionText "Which open bugs are at priority 0 or 1?";
   $question14 has storedPackage "beads";
   $question14 has storedVersion "0.1.0";
   $question14 has storedQuestionOrder 14;
+put storedAnswer (question: $question14, query: $query14);
 put $question15 isa StoredQuestion, has storedQuestionId "beads/q-15";
 update
   $question15 has storedQuestionText "How many beads are in each status, and of each type?";

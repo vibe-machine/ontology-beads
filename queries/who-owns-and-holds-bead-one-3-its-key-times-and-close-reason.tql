@@ -1,0 +1,11 @@
+# Who owns this bead, who holds it now, when was it created, started and closed, and why was it closed?
+# Finds bead one-3 and reads its owner, its holder (assignee), when it was created, started and closed, and why it was closed.
+match
+  $bead isa Bead, has beadId "one-3";
+  $bead has owner $owner;
+  $bead has assignee $holder;
+  $bead has createdAt $createdAt;
+  $bead has startedAt $startedAt;
+  $bead has closedAt $closedAt;
+  $bead has closeReason $closeReason;
+select $owner, $holder, $createdAt, $startedAt, $closedAt, $closeReason;

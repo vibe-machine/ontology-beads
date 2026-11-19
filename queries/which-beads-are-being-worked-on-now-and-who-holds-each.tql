@@ -1,0 +1,12 @@
+# Which beads are being worked on right now, and who or which agent holds each one?
+# Lists in-progress beads with their holder and, where the bead has a lease, the lease holder, last heartbeat and expiry; the try blocks keep beads that have no holder or lease.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $bead, category: $status);
+  $status isa BeadStatus, has name "in_progress";
+  try { $bead has assignee $holder; };
+  try {
+    isAssignmentTo (assignment: $lease, assignmentTarget: $bead);
+    $lease isa Lease, has leaseHolder $leaseHolder, has heartbeatAt $lastHeartbeat, has leaseExpiresAt $leaseExpiresAt;
+  };
+select $id, $title, $holder, $leaseHolder, $lastHeartbeat, $leaseExpiresAt;

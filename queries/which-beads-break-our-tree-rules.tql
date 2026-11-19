@@ -1,0 +1,30 @@
+# Which beads break our tree rules: a task or bug directly under an epic, a feature under a feature, or an epic still open though every child is closed?
+# Three alternatives joined with or: a task or bug whose direct parent is an epic, a feature whose direct parent is a feature, and an epic that is not closed while none of its direct children is still open.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $bead, category: $type);
+  $type isa BeadType, has name $typeName;
+  {
+    { $typeName == "task"; } or { $typeName == "bug"; };
+    isPartOf (part: $bead, whole: $epicParent);
+    isCategorizedBy (categorizedThing: $epicParent, category: $epicParentType);
+    $epicParentType isa BeadType, has name "epic";
+  } or {
+    $typeName == "feature";
+    isPartOf (part: $bead, whole: $featureParent);
+    isCategorizedBy (categorizedThing: $featureParent, category: $featureParentType);
+    $featureParentType isa BeadType, has name "feature";
+  } or {
+    $typeName == "epic";
+    isCategorizedBy (categorizedThing: $bead, category: $epicStatus);
+    $epicStatus isa BeadStatus, has name $epicStatusName;
+    $epicStatusName != "closed";
+    isPartOf (part: $closedChild, whole: $bead);
+    not {
+      isPartOf (part: $openChild, whole: $bead);
+      isCategorizedBy (categorizedThing: $openChild, category: $childStatus);
+      $childStatus isa BeadStatus, has name $childStatusName;
+      $childStatusName != "closed";
+    };
+  };
+select $id, $title, $typeName;

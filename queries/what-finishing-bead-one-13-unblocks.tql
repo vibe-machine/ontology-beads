@@ -1,0 +1,7 @@
+# What does finishing this bead unblock?
+# Follows the blocks links out of bead one-13 to the beads waiting on it.
+match
+  $bead isa Bead, has beadId "one-13";
+  precedes (predecessor: $bead, successor: $waiting);
+  $waiting has beadId $waitingId, has title $waitingTitle;
+select $waitingId, $waitingTitle;

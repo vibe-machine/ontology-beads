@@ -1,0 +1,11 @@
+# Which beads wait on a person's approval, and which approvals are still open?
+# Finds gates whose gate type is human, shows whether each is still open, and lists the beads each one blocks.
+match
+  $gate isa Bead, has beadId $gateId, has title $gateTitle;
+  isCategorizedBy (categorizedThing: $gate, category: $gateType);
+  $gateType isa GateType, has name "human";
+  isCategorizedBy (categorizedThing: $gate, category: $status);
+  $status isa BeadStatus, has name $gateStatus;
+  precedes (predecessor: $gate, successor: $waiter);
+  $waiter has beadId $waiterId, has title $waiterTitle;
+select $gateId, $gateTitle, $gateStatus, $waiterId, $waiterTitle;

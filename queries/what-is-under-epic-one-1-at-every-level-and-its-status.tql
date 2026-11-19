@@ -1,0 +1,11 @@
+# What is under this epic, at every level, and how much of it is closed?
+# Uses the descendants function to walk the parent-child links down from epic one-1 at any depth, and shows each bead's type and status; the rows with status closed are the closed share.
+match
+  $epic isa Bead, has beadId "one-1";
+  let $descendant in descendants($epic);
+  $descendant has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $descendant, category: $type);
+  $type isa BeadType, has name $typeName;
+  isCategorizedBy (categorizedThing: $descendant, category: $status);
+  $status isa BeadStatus, has name $statusName;
+select $id, $title, $typeName, $statusName;

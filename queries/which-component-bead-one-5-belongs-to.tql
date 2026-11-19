@@ -1,0 +1,10 @@
+# Which component does this bead belong to?
+# Walks up from bead one-5 through its parents and returns the tvm:component: label found on the epic above it.
+match
+  $bead isa Bead, has beadId "one-5";
+  let $ancestor in ancestors($bead);
+  isCategorizedBy (categorizedThing: $ancestor, category: $label);
+  $label isa BeadLabel, has name $component;
+  $component like "^tvm:component:";
+  $ancestor has beadId $epicId;
+select $component, $epicId;

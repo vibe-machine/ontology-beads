@@ -1,0 +1,15 @@
+# Which beads are ready to start: open, nothing open in front of them, most urgent first?
+# Keeps open beads that have no open blocker themselves and none on any bead above them (openBlockers and ancestors are functions in the package), then sorts by priority level, 0 first.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $bead, category: $status);
+  $status isa BeadStatus, has name "open";
+  isCategorizedBy (categorizedThing: $bead, category: $priority);
+  $priority isa Priority, has priorityLevel $level;
+  not { let $blocker in openBlockers($bead); };
+  not {
+    let $ancestor in ancestors($bead);
+    let $ancestorBlocker in openBlockers($ancestor);
+  };
+select $id, $title, $level;
+sort $level asc;
