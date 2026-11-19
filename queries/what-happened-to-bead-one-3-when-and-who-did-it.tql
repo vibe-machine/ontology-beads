@@ -1,0 +1,12 @@
+# What happened to this bead and when, and who did it: created, claimed, status changed, labelled, closed, reopened?
+# Lists the history entries about bead one-3 with their kind, actor, time and, where recorded, old and new value, oldest first.
+match
+  $bead isa Bead, has beadId "one-3";
+  isAbout (content: $entry, subjectMatter: $bead);
+  $entry isa HistoryEntry, has actor $actor, has createdAt $when;
+  isCategorizedBy (categorizedThing: $entry, category: $kind);
+  $kind isa HistoryEntryType, has name $whatHappened;
+  try { $entry has oldValue $oldValue; };
+  try { $entry has newValue $newValue; };
+select $when, $whatHappened, $actor, $oldValue, $newValue;
+sort $when asc;

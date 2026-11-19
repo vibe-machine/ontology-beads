@@ -1,0 +1,15 @@
+# Which beads were created, or closed, in a given period?
+# Keeps beads created in the period or closed in it, shows both dates where present, and removes the duplicate row for a bead that did both.
+match
+  $bead isa Bead, has beadId $id, has title $title, has createdAt $createdAt;
+  try { $bead has closedAt $closedAt; };
+  {
+    $createdAt >= 2026-11-01T00:00:00;
+    $createdAt < 2026-12-01T00:00:00;
+  } or {
+    $bead has closedAt $closedInPeriod;
+    $closedInPeriod >= 2026-11-01T00:00:00;
+    $closedInPeriod < 2026-12-01T00:00:00;
+  };
+select $id, $title, $createdAt, $closedAt;
+distinct;

@@ -17,8 +17,8 @@ The questions Beads is meant to answer, and the query that answers each one. Ins
 13. Which beads carry a given label, or any one of several labels? — [`queries/which-beads-carry-the-label-ux-or-backend.tql`](which-beads-carry-the-label-ux-or-backend.tql)
 14. Which open bugs are at priority 0 or 1? — [`queries/which-open-bugs-are-at-priority-0-or-1.tql`](which-open-bugs-are-at-priority-0-or-1.tql)
 15. How many beads are in each status, and of each type? — [`queries/how-many-beads-are-in-each-status-and-of-each-type.tql`](how-many-beads-are-in-each-status-and-of-each-type.tql)
-16. Which beads were created, or closed, in a given period? — no query yet
-17. Which beads were discovered while working on this one, which beads are related to it, and which bead replaces it? — no query yet
-18. What happened to this bead and when, and who did it: created, claimed, status changed, labelled, closed, reopened? — no query yet
-19. What comments are on this bead, and by whom? — no query yet
-20. Which beads belong to a wave, which wave, and what state is the wave in? — no query yet
+16. Which beads were created, or closed, in a given period? — [`queries/which-beads-were-created-or-closed-in-november-2026.tql`](which-beads-were-created-or-closed-in-november-2026.tql)
+17. Which beads were discovered while working on this one, which beads are related to it, and which bead replaces it? — [`queries/beads-discovered-from-related-to-and-replacing-bead-one-17.tql`](beads-discovered-from-related-to-and-replacing-bead-one-17.tql)
+18. What happened to this bead and when, and who did it: created, claimed, status changed, labelled, closed, reopened? — [`queries/what-happened-to-bead-one-3-when-and-who-did-it.tql`](what-happened-to-bead-one-3-when-and-who-did-it.tql)
+19. What comments are on this bead, and by whom? — [`queries/what-comments-are-on-bead-one-5-and-by-whom.tql`](what-comments-are-on-bead-one-5-and-by-whom.tql)
+20. Which beads belong to a wave, which wave, and what state is the wave in? — [`queries/which-beads-belong-to-which-wave-and-the-wave-s-state.tql`](which-beads-belong-to-which-wave-and-the-wave-s-state.tql)

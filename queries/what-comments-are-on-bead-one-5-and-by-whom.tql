@@ -1,0 +1,8 @@
+# What comments are on this bead, and by whom?
+# Lists the comments about bead one-5 with author, text and time, oldest first.
+match
+  $bead isa Bead, has beadId "one-5";
+  isAbout (content: $comment, subjectMatter: $bead);
+  $comment isa Comment, has author $author, has commentText $text, has createdAt $when;
+select $when, $author, $text;
+sort $when asc;

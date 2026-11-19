@@ -1,0 +1,16 @@
+# Which beads were discovered while working on this one, which beads are related to it, and which bead replaces it?
+# Three alternatives joined with or, each naming its link: beads discovered while working on one-17, beads related to it, and the bead that supersedes it.
+match
+  $bead isa Bead, has beadId "one-17";
+  {
+    isTriggeredBy (triggeredThing: $linked, triggeringEvent: $bead);
+    let $link = "discovered from it";
+  } or {
+    related (relatedBead: $bead, relatedBead: $linked);
+    let $link = "related";
+  } or {
+    supersedes (derivedThing: $linked, basis: $bead);
+    let $link = "replaces it";
+  };
+  $linked has beadId $linkedId, has title $linkedTitle;
+select $link, $linkedId, $linkedTitle;

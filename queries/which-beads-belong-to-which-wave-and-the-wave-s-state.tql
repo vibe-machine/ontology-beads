@@ -1,0 +1,12 @@
+# Which beads belong to a wave, which wave, and what state is the wave in?
+# Finds beads of type wave, reads the state from their tvm:wave= label, and lists the beads that are members of each wave.
+match
+  $wave isa Bead, has beadId $waveId, has title $waveTitle;
+  isCategorizedBy (categorizedThing: $wave, category: $type);
+  $type isa BeadType, has name "wave";
+  isCategorizedBy (categorizedThing: $wave, category: $stateLabel);
+  $stateLabel isa BeadLabel, has name $waveState;
+  $waveState like "^tvm:wave=";
+  isMemberOf (member: $member, collection: $wave);
+  $member has beadId $memberId, has title $memberTitle;
+select $waveId, $waveTitle, $waveState, $memberId, $memberTitle;
