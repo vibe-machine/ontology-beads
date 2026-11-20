@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "onbeads",
+  "project_id": "1cc2d665-253b-4982-b256-bd8933d2dc35"
+}
