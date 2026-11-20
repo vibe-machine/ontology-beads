@@ -1,0 +1,16 @@
+# Which statuses and types does this repository add to the built-in ones, and which category does each custom status fall in?
+# Lists the statuses and types marked as a repository's own, and for a status the group it falls in.
+match
+  {
+    $own isa BeadStatus;
+    let $what = "status";
+  } or {
+    $own isa BeadType;
+    let $what = "type";
+  };
+  $own has name $name, has isCustom true;
+  try {
+    isCategorizedBy (categorizedThing: $own, category: $group);
+    $group isa StatusCategory, has name $fallsIn;
+  };
+select $what, $name, $fallsIn;

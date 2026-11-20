@@ -1,0 +1,6 @@
+# Which outside item does this bead stand for, and which system brought it in?
+# Lists the beads that carry an outside reference, with the system that brought them in where recorded.
+match
+  $bead isa Bead, has beadId $id, has externalRef $outsideItem;
+  try { $bead has sourceSystem $system; };
+select $id, $outsideItem, $system;

@@ -1,0 +1,7 @@
+# What extra data does a link carry, and does it point outside this repository?
+# Lists the blocks links whose blocker is outside this repository, with the outside target and any extra data on the link.
+match
+  $link isa blocks, links (successor: $bead), has externalTarget $target;
+  $bead has beadId $id;
+  try { $link has linkData $data; };
+select $id, $target, $data;

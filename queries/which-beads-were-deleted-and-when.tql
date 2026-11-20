@@ -1,0 +1,6 @@
+# Which beads were deleted, and when?
+# Lists the beads that carry a deletion time, most recent first.
+match
+  $bead isa Bead, has beadId $id, has title $title, has deletedAt $deleted;
+sort $deleted desc;
+select $id, $title, $deleted;

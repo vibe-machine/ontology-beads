@@ -1,0 +1,7 @@
+# Which id prefixes does this repository route to which folder?
+# Lists each id prefix a repository routes, with the folder its beads live in.
+match
+  $route isa BeadRoute, has routePrefix $prefix, has routePath $folder;
+  isMemberOf (member: $route, collection: $repository);
+  $repository isa BeadRepository, has name $repositoryName;
+select $repositoryName, $prefix, $folder;

@@ -1,12 +1,15 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-beads
-# upstream-tag: v0.1.2
-# upstream-commit: 1309be1554acc485ef8ce1934396f1e87e3d6766
+# upstream-tag: v0.2.0
+# upstream-commit: 5621bbcd3a52224e70845b89776b343fc91d8ab3
 # source-artifacts:
 # - package.json
+# - schema/stored-queries.tql
 # - schema/beads.tql
-# manifest: manifests/beads-v0.1.2.package-manifest.json
-# generator: lingo-lab-package/1.0.0
+# - data/beads-categories.tql
+# - data/beads-questions.tql
+# manifest: manifests/beads-v0.2.0.package-manifest.json
+# generator: hand-authored-package-bootstrap/0.1.0
 define
 
 attribute installationKey, value string;
@@ -22,3 +25,21 @@ relation installationOfOntologyModuleVersion sub isBasedOn,
     relates version as basis;
 
 OntologyModuleVersion plays installationOfOntologyModuleVersion:version;
+
+# Optional install-record fields (gist 5.1.0). All optional, so records
+# written before 5.1.0 stay valid. A failed install has no
+# installationOfOntologyModuleVersion link, so the record names its package
+# (installedModuleRepoUrl) and version (targetModuleVersion) itself.
+attribute previousModuleVersion, value string;
+attribute targetModuleVersion, value string;
+attribute installedModuleRepoUrl, value string;
+attribute installationTrigger, value string @values("install", "upgrade", "rebuild", "migration");
+attribute installationOutcome, value string @values("succeeded", "failed");
+attribute installationError, value string;
+
+OntologyModuleInstallation owns previousModuleVersion @card(0..1),
+    owns targetModuleVersion @card(0..1),
+    owns installedModuleRepoUrl @card(0..1),
+    owns installationTrigger @card(0..1),
+    owns installationOutcome @card(0..1),
+    owns installationError @card(0..1);

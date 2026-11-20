@@ -1,0 +1,7 @@
+# On which machine was this bead's lease granted?
+# Lists each leased bead with the lease's holder and the machine that granted it.
+match
+  isAssignmentTo (assignment: $lease, assignmentTarget: $bead);
+  $lease isa Lease, has leaseHolder $holder, has grantedNode $machine;
+  $bead has beadId $id;
+select $id, $holder, $machine;

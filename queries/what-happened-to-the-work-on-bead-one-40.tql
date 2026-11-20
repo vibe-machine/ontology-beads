@@ -1,0 +1,12 @@
+# What happened to the work on this bead: cut, claimed, suspended, resumed, handed off, committed, landed, used?
+# Lists the provenance events about bead one-40 in the order they happened, with who did each and what it points at.
+match
+  $bead isa Bead, has beadId "one-40";
+  $event isa ProvenanceEvent, has occurredAt $when;
+  isAbout (content: $event, subjectMatter: $bead);
+  isCategorizedBy (categorizedThing: $event, category: $eventKind);
+  $eventKind isa ProvenanceKind, has name $kind;
+  try { $event has actor $who; };
+  try { $event has reference $pointsAt; };
+sort $when;
+select $when, $kind, $who, $pointsAt;

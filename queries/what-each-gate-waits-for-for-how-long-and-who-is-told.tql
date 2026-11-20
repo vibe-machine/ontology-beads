@@ -1,0 +1,10 @@
+# What exactly is this gate waiting for, for how long at most, and who is told when it clears?
+# Lists each gate with its type, what it waits for and its time limit; a gate with several people to tell appears once for each.
+match
+  $gate isa Bead, has beadId $id;
+  isCategorizedBy (categorizedThing: $gate, category: $gateType);
+  $gateType isa GateType, has name $type;
+  try { $gate has awaitId $waitsFor; };
+  try { $gate has timeoutSeconds $seconds; };
+  try { $gate has waiter $told; };
+select $id, $type, $waitsFor, $seconds, $told;

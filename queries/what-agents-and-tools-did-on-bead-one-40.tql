@@ -1,0 +1,13 @@
+# What did an agent or tool do on this bead: which model, which prompt and response, which tool, did it fail?
+# Lists the interactions recorded about bead one-40 in order, with who did it, the model or tool, the exit code and any error.
+match
+  $bead isa Bead, has beadId "one-40";
+  $step isa Interaction, has interactionKind $kind, has createdAt $when;
+  isAbout (content: $step, subjectMatter: $bead);
+  try { $step has actor $who; };
+  try { $step has modelName $model; };
+  try { $step has toolName $tool; };
+  try { $step has exitCode $exitCode; };
+  try { $step has errorText $error; };
+sort $when;
+select $when, $kind, $who, $model, $tool, $exitCode, $error;

@@ -1,0 +1,5 @@
+# Who created this bead, and which beads did a given person or agent create?
+# Keeps the beads whose creator is companion and lists each with its title.
+match
+  $bead isa Bead, has beadId $id, has title $title, has createdBy "companion";
+select $id, $title;

@@ -1,0 +1,8 @@
+# How long is this bead estimated to take, when is it due, and until when is it put off?
+# Lists the beads that have a due date, soonest first, with the estimate and the deferral time where recorded.
+match
+  $bead isa Bead, has beadId $id, has dueAt $due;
+  try { $bead has estimatedMinutes $minutes; };
+  try { $bead has deferUntil $putOffUntil; };
+sort $due;
+select $id, $due, $minutes, $putOffUntil;

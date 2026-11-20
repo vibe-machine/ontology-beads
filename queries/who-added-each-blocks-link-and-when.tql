@@ -1,0 +1,7 @@
+# Who added this link between two beads, and when?
+# Reads who added each blocks link and when from the link itself, and names the two beads it joins.
+match
+  blocks (predecessor: $first, successor: $then), has linkCreatedBy $who, has linkCreatedAt $when;
+  $first has beadId $firstId;
+  $then has beadId $thenId;
+select $firstId, $thenId, $who, $when;

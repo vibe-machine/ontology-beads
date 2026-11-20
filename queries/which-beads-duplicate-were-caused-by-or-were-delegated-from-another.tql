@@ -1,0 +1,16 @@
+# Which bead is a duplicate of which, and which bead was caused by, or delegated from, which?
+# Lists every duplicate, caused-by and delegated-from link as the bead it starts from, the kind, and the bead it points to.
+match
+  {
+    duplicates (referringThing: $from, referent: $to);
+    let $kind = "duplicates";
+  } or {
+    causedBy (triggeredThing: $from, triggeringEvent: $to);
+    let $kind = "caused-by";
+  } or {
+    delegatedFrom (derivedThing: $from, basis: $to);
+    let $kind = "delegated-from";
+  };
+  $from has beadId $fromId;
+  $to has beadId $toId;
+select $fromId, $kind, $toId;

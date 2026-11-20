@@ -1,0 +1,12 @@
+# Which beads are pinned, and which are templates?
+# Lists the beads marked pinned and the beads marked as templates, saying which each is.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  {
+    $bead has pinned true;
+    let $kind = "pinned";
+  } or {
+    $bead has isTemplate true;
+    let $kind = "template";
+  };
+select $id, $title, $kind;

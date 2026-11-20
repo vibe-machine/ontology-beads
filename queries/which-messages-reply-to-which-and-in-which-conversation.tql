@@ -1,0 +1,7 @@
+# Which message replies to which, and which messages form one conversation?
+# Lists each reply with the message it answers and the conversation the link names.
+match
+  repliesTo (referringThing: $reply, referent: $message), has threadId $conversation;
+  $reply has beadId $replyId;
+  $message has beadId $messageId;
+select $conversation, $replyId, $messageId;

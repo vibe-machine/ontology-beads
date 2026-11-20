@@ -1,0 +1,1 @@
+match $wip isa StatusCategory, has name "wip"; insert $review isa BeadStatus, has name "in_review", has isCustom true; $kind isa BeadType, has name "experiment", has isCustom true; isCategorizedBy (categorizedThing: $review, category: $wip);

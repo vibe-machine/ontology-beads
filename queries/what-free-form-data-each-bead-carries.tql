@@ -1,0 +1,5 @@
+# What free-form data does this bead carry beyond the dispatch facts?
+# Lists every bead that has free-form data, with the data as beads stores it.
+match
+  $bead isa Bead, has beadId $id, has freeFormData $data;
+select $id, $data;

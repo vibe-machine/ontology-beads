@@ -1,0 +1,1 @@
+match $check isa Bead, has beadId "one-46"; insert blocks (successor: $check), has externalTarget "external:billing:invoice-export", has linkData "{\"note\":\"waiting on the billing team\"}", has linkCreatedBy "dana", has linkCreatedAt 2026-11-19T13:00:00;

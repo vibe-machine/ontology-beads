@@ -1,0 +1,7 @@
+# Which beads had their text shortened to save space, when, at which commit, and from what size?
+# Lists the beads whose text was shortened, with how many times, when, at which commit and the size before.
+match
+  $bead isa Bead, has beadId $id, has compactionLevel $times, has compactedAt $when;
+  try { $bead has compactedAtCommit $commit; };
+  try { $bead has originalSize $sizeBefore; };
+select $id, $times, $when, $commit, $sizeBefore;

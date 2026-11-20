@@ -1,0 +1,7 @@
+# Which beads may only one worker take, and which are open to several?
+# Keeps the beads whose work type is open_competition; a bead with no work type is for one worker.
+match
+  $bead isa Bead, has beadId $id, has title $title;
+  isCategorizedBy (categorizedThing: $bead, category: $workType);
+  $workType isa WorkType, has name "open_competition";
+select $id, $title;

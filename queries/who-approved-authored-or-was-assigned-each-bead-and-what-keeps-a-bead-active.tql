@@ -1,0 +1,22 @@
+# Which person or agent approved, authored, or was assigned this bead as a link, and until which bead's closing is this one active?
+# Lists the approved-by, attests, authored-by, assigned-to and until links: the bead, the kind, and the bead at the other end.
+match
+  {
+    approvedBy (recognizedThing: $bead, recognizingParty: $other);
+    let $kind = "approved by";
+  } or {
+    attests (recognizedThing: $bead, recognizingParty: $other);
+    let $kind = "attested by";
+  } or {
+    authoredBy (product: $bead, producer: $other);
+    let $kind = "authored by";
+  } or {
+    assignedTo (participationContext: $bead, participant: $other);
+    let $kind = "assigned to";
+  } or {
+    activeUntil (affectedThing: $bead, effectSource: $other);
+    let $kind = "active until this closes";
+  };
+  $bead has beadId $id;
+  $other has beadId $otherId;
+select $id, $kind, $otherId;

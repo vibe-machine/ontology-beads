@@ -1,0 +1,5 @@
+# Which specification does this bead belong to, and which beads implement a given specification?
+# Keeps the beads whose specification is spec-export.
+match
+  $bead isa Bead, has beadId $id, has title $title, has specId "spec-export";
+select $id, $title;

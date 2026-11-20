@@ -1,0 +1,13 @@
+# Which beads run only if another fails, and which wait for all (or any) of another bead's children?
+# Lists the conditional-blocks links and the waits-for links: the waiting bead, the kind, and the bead it depends on.
+match
+  {
+    conditionallyBlocks (predecessor: $on, successor: $waiting);
+    let $kind = "runs only if it fails";
+  } or {
+    waitsFor (requiringThing: $waiting, requirement: $on);
+    let $kind = "waits for its children";
+  };
+  $waiting has beadId $waitingId;
+  $on has beadId $onId;
+select $waitingId, $kind, $onId;

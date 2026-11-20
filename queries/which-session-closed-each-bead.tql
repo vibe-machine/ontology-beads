@@ -1,0 +1,5 @@
+# Which session closed this bead?
+# Lists every bead that records the session that closed it, with that session.
+match
+  $bead isa Bead, has beadId $id, has closedBySession $session;
+select $id, $session;

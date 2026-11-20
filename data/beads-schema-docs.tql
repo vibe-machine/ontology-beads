@@ -1,13 +1,15 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-beads
-# upstream-tag: v0.1.2
-# upstream-commit: 1309be1554acc485ef8ce1934396f1e87e3d6766
+# upstream-tag: v0.2.0
+# upstream-commit: 5621bbcd3a52224e70845b89776b343fc91d8ab3
 # source-artifacts:
 # - package.json
+# - schema/stored-queries.tql
 # - schema/beads.tql
-# manifest: manifests/beads-v0.1.2.package-manifest.json
-# generator: lingo-lab-package/1.0.0
-
+# - data/beads-categories.tql
+# - data/beads-questions.tql
+# manifest: manifests/beads-v0.2.0.package-manifest.json
+# generator: hand-authored-package-bootstrap/0.1.0
 put $module isa SchemaModule,
   has moduleKey "beads",
   has moduleName "Beads",
@@ -418,8 +420,1430 @@ put $r45 isa SchemaResource,
   has definition "The process id of the dispatched agent, as an integer.";
 put (resource: $r45, module: $module) isa inModule;
 
+put $r46 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#createdBy",
+  has iri "https://github.com/vibe-machine/ontology-beads#createdBy",
+  has typeLabel "createdBy",
+  has kind "attribute",
+  has prefLabel "createdBy",
+  has definition "Who created the bead: a person's name or an agent's name such as companion. Beads sets it from the --actor option, else the git user name.";
+put (resource: $r46, module: $module) isa inModule;
+
+put $r47 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#closedBySession",
+  has iri "https://github.com/vibe-machine/ontology-beads#closedBySession",
+  has typeLabel "closedBySession",
+  has kind "attribute",
+  has prefLabel "closedBySession",
+  has definition "The Claude Code session that closed the bead.";
+put (resource: $r47, module: $module) isa inModule;
+
+put $r48 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#specId",
+  has iri "https://github.com/vibe-machine/ontology-beads#specId",
+  has typeLabel "specId",
+  has kind "attribute",
+  has prefLabel "specId",
+  has definition "The specification the bead belongs to.";
+put (resource: $r48, module: $module) isa inModule;
+
+put $r49 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#estimatedMinutes",
+  has iri "https://github.com/vibe-machine/ontology-beads#estimatedMinutes",
+  has typeLabel "estimatedMinutes",
+  has kind "attribute",
+  has prefLabel "estimatedMinutes",
+  has definition "How many minutes the bead is estimated to take.";
+put (resource: $r49, module: $module) isa inModule;
+
+put $r50 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#dueAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#dueAt",
+  has typeLabel "dueAt",
+  has kind "attribute",
+  has prefLabel "dueAt",
+  has definition "When the bead should be finished.";
+put (resource: $r50, module: $module) isa inModule;
+
+put $r51 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#deferUntil",
+  has iri "https://github.com/vibe-machine/ontology-beads#deferUntil",
+  has typeLabel "deferUntil",
+  has kind "attribute",
+  has prefLabel "deferUntil",
+  has definition "The time until which the bead is put off. Beads hides it from ready work until then.";
+put (resource: $r51, module: $module) isa inModule;
+
+put $r52 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#pinned",
+  has iri "https://github.com/vibe-machine/ontology-beads#pinned",
+  has typeLabel "pinned",
+  has kind "attribute",
+  has prefLabel "pinned",
+  has definition "True for a bead that is a standing context note and not work to finish.";
+put (resource: $r52, module: $module) isa inModule;
+
+put $r53 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#isTemplate",
+  has iri "https://github.com/vibe-machine/ontology-beads#isTemplate",
+  has typeLabel "isTemplate",
+  has kind "attribute",
+  has prefLabel "isTemplate",
+  has definition "True for a bead that is a read-only template other beads are made from.";
+put (resource: $r53, module: $module) isa inModule;
+
+put $r54 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#externalRef",
+  has iri "https://github.com/vibe-machine/ontology-beads#externalRef",
+  has typeLabel "externalRef",
+  has kind "attribute",
+  has prefLabel "externalRef",
+  has definition "The item in an outside system this bead stands for, such as gh-9 or jira-ABC.";
+put (resource: $r54, module: $module) isa inModule;
+
+put $r55 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#sourceSystem",
+  has iri "https://github.com/vibe-machine/ontology-beads#sourceSystem",
+  has typeLabel "sourceSystem",
+  has kind "attribute",
+  has prefLabel "sourceSystem",
+  has definition "The outside system or adapter that brought the bead in.";
+put (resource: $r55, module: $module) isa inModule;
+
+put $r56 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#freeFormData",
+  has iri "https://github.com/vibe-machine/ontology-beads#freeFormData",
+  has typeLabel "freeFormData",
+  has kind "attribute",
+  has prefLabel "freeFormData",
+  has definition "The bead's free-form data, as the JSON text beads stores. Tools and agents write their own keys here.";
+put (resource: $r56, module: $module) isa inModule;
+
+put $r57 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#deletedAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#deletedAt",
+  has typeLabel "deletedAt",
+  has kind "attribute",
+  has prefLabel "deletedAt",
+  has definition "When the bead was deleted. A deleted bead stays recorded with this time.";
+put (resource: $r57, module: $module) isa inModule;
+
+put $r58 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#compactionLevel",
+  has iri "https://github.com/vibe-machine/ontology-beads#compactionLevel",
+  has typeLabel "compactionLevel",
+  has kind "attribute",
+  has prefLabel "compactionLevel",
+  has definition "How many times the bead's text has been shortened to save space; 0 or absent means never.";
+put (resource: $r58, module: $module) isa inModule;
+
+put $r59 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#compactedAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#compactedAt",
+  has typeLabel "compactedAt",
+  has kind "attribute",
+  has prefLabel "compactedAt",
+  has definition "When the bead's text was last shortened.";
+put (resource: $r59, module: $module) isa inModule;
+
+put $r60 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#compactedAtCommit",
+  has iri "https://github.com/vibe-machine/ontology-beads#compactedAtCommit",
+  has typeLabel "compactedAtCommit",
+  has kind "attribute",
+  has prefLabel "compactedAtCommit",
+  has definition "The git commit at which the bead's text was shortened.";
+put (resource: $r60, module: $module) isa inModule;
+
+put $r61 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#originalSize",
+  has iri "https://github.com/vibe-machine/ontology-beads#originalSize",
+  has typeLabel "originalSize",
+  has kind "attribute",
+  has prefLabel "originalSize",
+  has definition "The size of the bead's text before it was shortened.";
+put (resource: $r61, module: $module) isa inModule;
+
+put $r62 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#awaitId",
+  has iri "https://github.com/vibe-machine/ontology-beads#awaitId",
+  has typeLabel "awaitId",
+  has kind "attribute",
+  has prefLabel "awaitId",
+  has definition "What exactly a gate waits for: a run id, a pull request number or the like.";
+put (resource: $r62, module: $module) isa inModule;
+
+put $r63 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#timeoutSeconds",
+  has iri "https://github.com/vibe-machine/ontology-beads#timeoutSeconds",
+  has typeLabel "timeoutSeconds",
+  has kind "attribute",
+  has prefLabel "timeoutSeconds",
+  has definition "The longest a gate waits, in seconds, before it is escalated.";
+put (resource: $r63, module: $module) isa inModule;
+
+put $r64 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#waiter",
+  has iri "https://github.com/vibe-machine/ontology-beads#waiter",
+  has typeLabel "waiter",
+  has kind "attribute",
+  has prefLabel "waiter",
+  has definition "An address told when a gate clears. A gate can have several.";
+put (resource: $r64, module: $module) isa inModule;
+
+put $r65 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#linkCreatedBy",
+  has iri "https://github.com/vibe-machine/ontology-beads#linkCreatedBy",
+  has typeLabel "linkCreatedBy",
+  has kind "attribute",
+  has prefLabel "linkCreatedBy",
+  has definition "Who added a link between two beads.";
+put (resource: $r65, module: $module) isa inModule;
+
+put $r66 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#linkCreatedAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#linkCreatedAt",
+  has typeLabel "linkCreatedAt",
+  has kind "attribute",
+  has prefLabel "linkCreatedAt",
+  has definition "When a link between two beads was added.";
+put (resource: $r66, module: $module) isa inModule;
+
+put $r67 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#linkData",
+  has iri "https://github.com/vibe-machine/ontology-beads#linkData",
+  has typeLabel "linkData",
+  has kind "attribute",
+  has prefLabel "linkData",
+  has definition "Extra data on a link, as the JSON text beads stores.";
+put (resource: $r67, module: $module) isa inModule;
+
+put $r68 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#externalTarget",
+  has iri "https://github.com/vibe-machine/ontology-beads#externalTarget",
+  has typeLabel "externalTarget",
+  has kind "attribute",
+  has prefLabel "externalTarget",
+  has definition "The target of a link that points outside this repository, where there is no bead to link to.";
+put (resource: $r68, module: $module) isa inModule;
+
+put $r69 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#threadId",
+  has iri "https://github.com/vibe-machine/ontology-beads#threadId",
+  has typeLabel "threadId",
+  has kind "attribute",
+  has prefLabel "threadId",
+  has definition "The conversation a reply link belongs to; it names the first message.";
+put (resource: $r69, module: $module) isa inModule;
+
+put $r70 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#waitGate",
+  has iri "https://github.com/vibe-machine/ontology-beads#waitGate",
+  has typeLabel "waitGate",
+  has kind "attribute",
+  has prefLabel "waitGate",
+  has definition "Whether a waits-for link waits for all of the other bead's children or for the first one.";
+put (resource: $r70, module: $module) isa inModule;
+
+put $r71 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#spawnerBeadId",
+  has iri "https://github.com/vibe-machine/ontology-beads#spawnerBeadId",
+  has typeLabel "spawnerBeadId",
+  has kind "attribute",
+  has prefLabel "spawnerBeadId",
+  has definition "On a waits-for link, the bead that creates the children being waited for.";
+put (resource: $r71, module: $module) isa inModule;
+
+put $r72 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#grantedNode",
+  has iri "https://github.com/vibe-machine/ontology-beads#grantedNode",
+  has typeLabel "grantedNode",
+  has kind "attribute",
+  has prefLabel "grantedNode",
+  has definition "The machine on which a lease was granted. A lease can only be enforced there.";
+put (resource: $r72, module: $module) isa inModule;
+
+put $r73 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#historyComment",
+  has iri "https://github.com/vibe-machine/ontology-beads#historyComment",
+  has typeLabel "historyComment",
+  has kind "attribute",
+  has prefLabel "historyComment",
+  has definition "The comment recorded with a history entry.";
+put (resource: $r73, module: $module) isa inModule;
+
+put $r74 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#interactionId",
+  has iri "https://github.com/vibe-machine/ontology-beads#interactionId",
+  has typeLabel "interactionId",
+  has kind "attribute",
+  has prefLabel "interactionId",
+  has definition "The id beads gives an interaction.";
+put (resource: $r74, module: $module) isa inModule;
+
+put $r75 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#interactionKind",
+  has iri "https://github.com/vibe-machine/ontology-beads#interactionKind",
+  has typeLabel "interactionKind",
+  has kind "attribute",
+  has prefLabel "interactionKind",
+  has definition "What kind of thing an agent or tool did, such as a model call or a tool call.";
+put (resource: $r75, module: $module) isa inModule;
+
+put $r76 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#modelName",
+  has iri "https://github.com/vibe-machine/ontology-beads#modelName",
+  has typeLabel "modelName",
+  has kind "attribute",
+  has prefLabel "modelName",
+  has definition "The model an interaction used.";
+put (resource: $r76, module: $module) isa inModule;
+
+put $r77 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#prompt",
+  has iri "https://github.com/vibe-machine/ontology-beads#prompt",
+  has typeLabel "prompt",
+  has kind "attribute",
+  has prefLabel "prompt",
+  has definition "The text sent to the model in an interaction.";
+put (resource: $r77, module: $module) isa inModule;
+
+put $r78 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#response",
+  has iri "https://github.com/vibe-machine/ontology-beads#response",
+  has typeLabel "response",
+  has kind "attribute",
+  has prefLabel "response",
+  has definition "The text the model or tool returned in an interaction.";
+put (resource: $r78, module: $module) isa inModule;
+
+put $r79 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#errorText",
+  has iri "https://github.com/vibe-machine/ontology-beads#errorText",
+  has typeLabel "errorText",
+  has kind "attribute",
+  has prefLabel "errorText",
+  has definition "The error an interaction ended with.";
+put (resource: $r79, module: $module) isa inModule;
+
+put $r80 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#toolName",
+  has iri "https://github.com/vibe-machine/ontology-beads#toolName",
+  has typeLabel "toolName",
+  has kind "attribute",
+  has prefLabel "toolName",
+  has definition "The tool an interaction ran.";
+put (resource: $r80, module: $module) isa inModule;
+
+put $r81 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#exitCode",
+  has iri "https://github.com/vibe-machine/ontology-beads#exitCode",
+  has typeLabel "exitCode",
+  has kind "attribute",
+  has prefLabel "exitCode",
+  has definition "The exit code of the tool an interaction ran.";
+put (resource: $r81, module: $module) isa inModule;
+
+put $r82 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#interactionLabel",
+  has iri "https://github.com/vibe-machine/ontology-beads#interactionLabel",
+  has typeLabel "interactionLabel",
+  has kind "attribute",
+  has prefLabel "interactionLabel",
+  has definition "A label a person or agent put on an interaction, such as good or bad.";
+put (resource: $r82, module: $module) isa inModule;
+
+put $r83 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#reason",
+  has iri "https://github.com/vibe-machine/ontology-beads#reason",
+  has typeLabel "reason",
+  has kind "attribute",
+  has prefLabel "reason",
+  has definition "Why an interaction was labelled as it was.";
+put (resource: $r83, module: $module) isa inModule;
+
+put $r84 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#extraData",
+  has iri "https://github.com/vibe-machine/ontology-beads#extraData",
+  has typeLabel "extraData",
+  has kind "attribute",
+  has prefLabel "extraData",
+  has definition "Further data on an interaction, as the JSON text beads stores.";
+put (resource: $r84, module: $module) isa inModule;
+
+put $r85 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#provenanceId",
+  has iri "https://github.com/vibe-machine/ontology-beads#provenanceId",
+  has typeLabel "provenanceId",
+  has kind "attribute",
+  has prefLabel "provenanceId",
+  has definition "The id beads gives a provenance event.";
+put (resource: $r85, module: $module) isa inModule;
+
+put $r86 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#reference",
+  has iri "https://github.com/vibe-machine/ontology-beads#reference",
+  has typeLabel "reference",
+  has kind "attribute",
+  has prefLabel "reference",
+  has definition "What a provenance event points at, such as a commit id.";
+put (resource: $r86, module: $module) isa inModule;
+
+put $r87 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#referenceKind",
+  has iri "https://github.com/vibe-machine/ontology-beads#referenceKind",
+  has typeLabel "referenceKind",
+  has kind "attribute",
+  has prefLabel "referenceKind",
+  has definition "What kind of thing a provenance event's reference is, such as commit.";
+put (resource: $r87, module: $module) isa inModule;
+
+put $r88 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#payload",
+  has iri "https://github.com/vibe-machine/ontology-beads#payload",
+  has typeLabel "payload",
+  has kind "attribute",
+  has prefLabel "payload",
+  has definition "Further data on a provenance event, as the JSON text beads stores.";
+put (resource: $r88, module: $module) isa inModule;
+
+put $r89 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#provenanceSource",
+  has iri "https://github.com/vibe-machine/ontology-beads#provenanceSource",
+  has typeLabel "provenanceSource",
+  has kind "attribute",
+  has prefLabel "provenanceSource",
+  has definition "Which part of the system recorded a provenance event.";
+put (resource: $r89, module: $module) isa inModule;
+
+put $r90 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#occurredAt",
+  has iri "https://github.com/vibe-machine/ontology-beads#occurredAt",
+  has typeLabel "occurredAt",
+  has kind "attribute",
+  has prefLabel "occurredAt",
+  has definition "When the thing a provenance event records happened, which can be earlier than when it was recorded.";
+put (resource: $r90, module: $module) isa inModule;
+
+put $r91 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#isCustom",
+  has iri "https://github.com/vibe-machine/ontology-beads#isCustom",
+  has typeLabel "isCustom",
+  has kind "attribute",
+  has prefLabel "isCustom",
+  has definition "True for a status or type a repository added to the ones built into beads.";
+put (resource: $r91, module: $module) isa inModule;
+
+put $r92 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#routePrefix",
+  has iri "https://github.com/vibe-machine/ontology-beads#routePrefix",
+  has typeLabel "routePrefix",
+  has kind "attribute",
+  has prefLabel "routePrefix",
+  has definition "A bead id prefix, such as gist-.";
+put (resource: $r92, module: $module) isa inModule;
+
+put $r93 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#routePath",
+  has iri "https://github.com/vibe-machine/ontology-beads#routePath",
+  has typeLabel "routePath",
+  has kind "attribute",
+  has prefLabel "routePath",
+  has definition "The folder whose bead database holds the beads with a route's prefix.";
+put (resource: $r93, module: $module) isa inModule;
+
+put $r94 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#childOf",
+  has iri "https://github.com/vibe-machine/ontology-beads#childOf",
+  has typeLabel "childOf",
+  has kind "relation",
+  has prefLabel "childOf",
+  has definition "Places one bead under another: the part is the child, the whole is the parent. Beads calls this link parent-child.";
+put (resource: $r94, module: $module) isa inModule;
+
+put $r95 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#blocks",
+  has iri "https://github.com/vibe-machine/ontology-beads#blocks",
+  has typeLabel "blocks",
+  has kind "relation",
+  has prefLabel "blocks",
+  has definition "The successor cannot start until the predecessor is closed. Beads calls this link blocks.";
+put (resource: $r95, module: $module) isa inModule;
+
+put $r96 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#conditionallyBlocks",
+  has iri "https://github.com/vibe-machine/ontology-beads#conditionallyBlocks",
+  has typeLabel "conditionallyBlocks",
+  has kind "relation",
+  has prefLabel "conditionallyBlocks",
+  has definition "The successor runs only if the predecessor fails. Beads calls this link conditional-blocks.";
+put (resource: $r96, module: $module) isa inModule;
+
+put $r97 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#waitsFor",
+  has iri "https://github.com/vibe-machine/ontology-beads#waitsFor",
+  has typeLabel "waitsFor",
+  has kind "relation",
+  has prefLabel "waitsFor",
+  has definition "The requiring bead waits for the children of the required bead: all of them or the first, as the link's gate says. Beads calls this link waits-for.";
+put (resource: $r97, module: $module) isa inModule;
+
+put $r98 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#discoveredFrom",
+  has iri "https://github.com/vibe-machine/ontology-beads#discoveredFrom",
+  has typeLabel "discoveredFrom",
+  has kind "relation",
+  has prefLabel "discoveredFrom",
+  has definition "The triggered bead was found while working on the triggering one. Beads calls this link discovered-from.";
+put (resource: $r98, module: $module) isa inModule;
+
+put $r99 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#causedBy",
+  has iri "https://github.com/vibe-machine/ontology-beads#causedBy",
+  has typeLabel "causedBy",
+  has kind "relation",
+  has prefLabel "causedBy",
+  has definition "The triggered bead was caused by the triggering one; a root-cause link. Beads calls this link caused-by.";
+put (resource: $r99, module: $module) isa inModule;
+
+put $r100 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#delegatedFrom",
+  has iri "https://github.com/vibe-machine/ontology-beads#delegatedFrom",
+  has typeLabel "delegatedFrom",
+  has kind "relation",
+  has prefLabel "delegatedFrom",
+  has definition "The derived bead is work handed down from the basis bead. Beads calls this link delegated-from.";
+put (resource: $r100, module: $module) isa inModule;
+
+put $r101 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#relatesTo",
+  has iri "https://github.com/vibe-machine/ontology-beads#relatesTo",
+  has typeLabel "relatesTo",
+  has kind "relation",
+  has prefLabel "relatesTo",
+  has definition "A loose link from one bead to another it has something to do with. Beads calls this link relates-to.";
+put (resource: $r101, module: $module) isa inModule;
+
+put $r102 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#duplicates",
+  has iri "https://github.com/vibe-machine/ontology-beads#duplicates",
+  has typeLabel "duplicates",
+  has kind "relation",
+  has prefLabel "duplicates",
+  has definition "The referring bead is a duplicate of the referent. Beads calls this link duplicates.";
+put (resource: $r102, module: $module) isa inModule;
+
+put $r103 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#repliesTo",
+  has iri "https://github.com/vibe-machine/ontology-beads#repliesTo",
+  has typeLabel "repliesTo",
+  has kind "relation",
+  has prefLabel "repliesTo",
+  has definition "The referring bead is a reply to the referent, in the conversation the link names. Beads calls this link replies-to.";
+put (resource: $r103, module: $module) isa inModule;
+
+put $r104 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#tracks",
+  has iri "https://github.com/vibe-machine/ontology-beads#tracks",
+  has typeLabel "tracks",
+  has kind "relation",
+  has prefLabel "tracks",
+  has definition "The referring bead follows the progress of the referent without blocking it. Beads calls this link tracks.";
+put (resource: $r104, module: $module) isa inModule;
+
+put $r105 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#activeUntil",
+  has iri "https://github.com/vibe-machine/ontology-beads#activeUntil",
+  has typeLabel "activeUntil",
+  has kind "relation",
+  has prefLabel "activeUntil",
+  has definition "The affected bead stays active until the other bead closes. Beads calls this link until.";
+put (resource: $r105, module: $module) isa inModule;
+
+put $r106 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#validates",
+  has iri "https://github.com/vibe-machine/ontology-beads#validates",
+  has typeLabel "validates",
+  has kind "relation",
+  has prefLabel "validates",
+  has definition "The recognizing bead validates or approves the recognized one. Beads calls this link validates.";
+put (resource: $r106, module: $module) isa inModule;
+
+put $r107 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#approvedBy",
+  has iri "https://github.com/vibe-machine/ontology-beads#approvedBy",
+  has typeLabel "approvedBy",
+  has kind "relation",
+  has prefLabel "approvedBy",
+  has definition "The recognized bead was approved by the recognizing party. Beads calls this link approved-by.";
+put (resource: $r107, module: $module) isa inModule;
+
+put $r108 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#attests",
+  has iri "https://github.com/vibe-machine/ontology-beads#attests",
+  has typeLabel "attests",
+  has kind "relation",
+  has prefLabel "attests",
+  has definition "The recognizing party attests to the recognized bead, such as a skill. Beads calls this link attests.";
+put (resource: $r108, module: $module) isa inModule;
+
+put $r109 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#authoredBy",
+  has iri "https://github.com/vibe-machine/ontology-beads#authoredBy",
+  has typeLabel "authoredBy",
+  has kind "relation",
+  has prefLabel "authoredBy",
+  has definition "The product bead was authored by the producer. Beads calls this link authored-by.";
+put (resource: $r109, module: $module) isa inModule;
+
+put $r110 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#assignedTo",
+  has iri "https://github.com/vibe-machine/ontology-beads#assignedTo",
+  has typeLabel "assignedTo",
+  has kind "relation",
+  has prefLabel "assignedTo",
+  has definition "The bead, as the context, is assigned to the participant. Beads calls this link assigned-to.";
+put (resource: $r110, module: $module) isa inModule;
+
+put $r111 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#WorkType",
+  has iri "https://github.com/vibe-machine/ontology-beads#WorkType",
+  has typeLabel "WorkType",
+  has kind "entity",
+  has prefLabel "WorkType",
+  has definition "Whether one worker may take a bead (mutex) or several may (open_competition).";
+put (resource: $r111, module: $module) isa inModule;
+
+put $r112 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#ProvenanceKind",
+  has iri "https://github.com/vibe-machine/ontology-beads#ProvenanceKind",
+  has typeLabel "ProvenanceKind",
+  has kind "entity",
+  has prefLabel "ProvenanceKind",
+  has definition "What a provenance event records: cut, claim, suspend, resume, handoff, commit, land or used.";
+put (resource: $r112, module: $module) isa inModule;
+
+put $r113 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#StatusCategory",
+  has iri "https://github.com/vibe-machine/ontology-beads#StatusCategory",
+  has typeLabel "StatusCategory",
+  has kind "entity",
+  has prefLabel "StatusCategory",
+  has definition "The group a status falls in: active, wip, done, frozen or unspecified. Beads uses it to treat a repository's own statuses correctly.";
+put (resource: $r113, module: $module) isa inModule;
+
+put $r114 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#Interaction",
+  has iri "https://github.com/vibe-machine/ontology-beads#Interaction",
+  has typeLabel "Interaction",
+  has kind "entity",
+  has prefLabel "Interaction",
+  has definition "One thing an agent or tool did on a bead: a model call with its prompt and response, or a tool run with its exit code.";
+put (resource: $r114, module: $module) isa inModule;
+
+put $r115 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#ProvenanceEvent",
+  has iri "https://github.com/vibe-machine/ontology-beads#ProvenanceEvent",
+  has typeLabel "ProvenanceEvent",
+  has kind "entity",
+  has prefLabel "ProvenanceEvent",
+  has definition "One step in the life of the work on a bead: it was cut, claimed, suspended, resumed, handed off, committed, landed or used.";
+put (resource: $r115, module: $module) isa inModule;
+
+put $r116 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#BeadRoute",
+  has iri "https://github.com/vibe-machine/ontology-beads#BeadRoute",
+  has typeLabel "BeadRoute",
+  has kind "entity",
+  has prefLabel "BeadRoute",
+  has definition "An id prefix and the folder whose bead database holds the beads with that prefix.";
+put (resource: $r116, module: $module) isa inModule;
+
 # -- BEGIN GENERATED STRUCTURAL METADATA --
 # Generated from authoritative schema definitions. Do not hand-edit this section.
+
+put $generated_role_1 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#storedAnswer:query",
+  has iri "https://github.com/vibe-machine/ontology-beads#storedAnswer:query",
+  has typeLabel "storedAnswer:query",
+  has kind "role",
+  has roleName "query",
+  has prefLabel "query",
+  has definition "Role 'query' in relation 'storedAnswer'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "beads";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-beads#storedAnswer:query";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_2 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-beads#storedAnswer:question",
+  has iri "https://github.com/vibe-machine/ontology-beads#storedAnswer:question",
+  has typeLabel "storedAnswer:question",
+  has kind "role",
+  has roleName "question",
+  has prefLabel "question",
+  has definition "Role 'question' in relation 'storedAnswer'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "beads";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-beads#storedAnswer:question";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "acceptanceCriteria";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "actor";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "agentPid";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "assignee";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "author";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "awaitId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "baseBranch";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "beadDatabaseName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "beadId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "closeReason";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "closedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "closedBySession";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "commentText";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "compactedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "compactedAtCommit";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "compactionLevel";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "createdAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "createdBy";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "deferUntil";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "deletedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "design";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "dueAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "errorText";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "estimatedMinutes";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "exitCode";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "externalRef";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "extraData";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "folderPath";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "freeFormData";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "grantedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "grantedNode";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "heartbeatAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "historyComment";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "interactionId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "interactionKind";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "interactionLabel";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "isCustom";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "isTemplate";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "lastCopiedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "lastCopiedCommit";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "lastCopiedFingerprint";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "leaseExpiresAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "leaseHolder";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "linkData";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "modelName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "newValue";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "notes";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "occurredAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "oldValue";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "originalSize";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "owner";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "payload";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "pinned";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "priorityLevel";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "prompt";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "provenanceId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "provenanceSource";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "reason";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "reference";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "referenceKind";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "response";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "routePath";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "routePrefix";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "sourceSystem";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "spawnerBeadId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "specId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "startedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedPackage";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedQueryExplanation";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedQueryName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedQueryText";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedQueryTitle";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedQuestionId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedQuestionOrder";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedQuestionText";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "storedVersion";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "threadId";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "timeoutSeconds";
+  not {
+    $schema_resource has valueTypeName "integer";
+  };
+insert
+  $schema_resource has valueTypeName "integer";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "title";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "tmuxSession";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "tmuxSocket";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "toolName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "updatedAt";
+  not {
+    $schema_resource has valueTypeName "datetime";
+  };
+insert
+  $schema_resource has valueTypeName "datetime";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "waiter";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "worktreePath";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $struct_left isa SchemaResource, has typeLabel "activeUntil";
+  $struct_right isa SchemaResource, has typeLabel "isAffectedBy";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "approvedBy";
+  $struct_right isa SchemaResource, has typeLabel "isRecognizedBy";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "assignedTo";
+  $struct_right isa SchemaResource, has typeLabel "hasParticipant";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "attests";
+  $struct_right isa SchemaResource, has typeLabel "isRecognizedBy";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "authoredBy";
+  $struct_right isa SchemaResource, has typeLabel "isProducedBy";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
@@ -429,6 +1853,501 @@ match
   };
 insert
   (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadLabel";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadRepository";
+  $struct_right isa SchemaResource, has typeLabel "Collection";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadRoute";
+  $struct_right isa SchemaResource, has typeLabel "Content";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadStatus";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadType";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "blocks";
+  $struct_right isa SchemaResource, has typeLabel "precedes";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "causedBy";
+  $struct_right isa SchemaResource, has typeLabel "isTriggeredBy";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "childOf";
+  $struct_right isa SchemaResource, has typeLabel "isPartOf";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Comment";
+  $struct_right isa SchemaResource, has typeLabel "ContentExpression";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "conditionallyBlocks";
+  $struct_right isa SchemaResource, has typeLabel "precedes";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "delegatedFrom";
+  $struct_right isa SchemaResource, has typeLabel "isBasedOn";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "discoveredFrom";
+  $struct_right isa SchemaResource, has typeLabel "isTriggeredBy";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "duplicates";
+  $struct_right isa SchemaResource, has typeLabel "refersTo";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "GateType";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "ContentExpression";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntryType";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "HistoricalEvent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "Assignment";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Priority";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "HistoricalEvent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceKind";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "related";
+  $struct_right isa SchemaResource, has typeLabel "isConnectedTo";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "relatesTo";
+  $struct_right isa SchemaResource, has typeLabel "refersTo";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "repliesTo";
+  $struct_right isa SchemaResource, has typeLabel "refersTo";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StatusCategory";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "supersedes";
+  $struct_right isa SchemaResource, has typeLabel "isBasedOn";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "tracks";
+  $struct_right isa SchemaResource, has typeLabel "refersTo";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "validates";
+  $struct_right isa SchemaResource, has typeLabel "isRecognizedBy";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "waitsFor";
+  $struct_right isa SchemaResource, has typeLabel "requires";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "WorkType";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "activeUntil";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "activeUntil";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "activeUntil";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "activeUntil";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "approvedBy";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "approvedBy";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "approvedBy";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "approvedBy";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "assignedTo";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "assignedTo";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "assignedTo";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "assignedTo";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "attests";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "attests";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "attests";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "attests";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "authoredBy";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "authoredBy";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "authoredBy";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "authoredBy";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "acceptanceCriteria";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "agentPid";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "assignee";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "awaitId";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "baseBranch";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
@@ -441,7 +2360,88 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "title";
+  $struct_right isa SchemaResource, has typeLabel "closedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "closedBySession";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "closeReason";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "compactedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "compactedAtCommit";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "compactionLevel";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "createdBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "deferUntil";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "deletedAt";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -468,7 +2468,43 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "acceptanceCriteria";
+  $struct_right isa SchemaResource, has typeLabel "dueAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "estimatedMinutes";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "externalRef";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "freeFormData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isTemplate";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -486,6 +2522,15 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "originalSize";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
   $struct_right isa SchemaResource, has typeLabel "owner";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
@@ -495,7 +2540,7 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "assignee";
+  $struct_right isa SchemaResource, has typeLabel "pinned";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -504,7 +2549,7 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  $struct_right isa SchemaResource, has typeLabel "sourceSystem";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -513,7 +2558,7 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "updatedAt";
+  $struct_right isa SchemaResource, has typeLabel "specId";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -531,7 +2576,7 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "closedAt";
+  $struct_right isa SchemaResource, has typeLabel "timeoutSeconds";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -540,16 +2585,7 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "closeReason";
-  not {
-    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-  };
-insert
-  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "tmuxSocket";
+  $struct_right isa SchemaResource, has typeLabel "title";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -567,6 +2603,33 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "tmuxSocket";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "updatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "waiter";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
   $struct_right isa SchemaResource, has typeLabel "worktreePath";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
@@ -575,35 +2638,17 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "baseBranch";
-  not {
-    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-  };
-insert
-  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "Bead";
-  $struct_right isa SchemaResource, has typeLabel "agentPid";
-  not {
-    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-  };
-insert
-  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "BeadRepository";
-  $struct_right isa SchemaResource, has typeLabel "Collection";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "BeadRepository";
+  $struct_left isa SchemaResource, has typeLabel "BeadLabel";
   $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadRepository";
+  $struct_right isa SchemaResource, has typeLabel "beadDatabaseName";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -621,7 +2666,7 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "BeadRepository";
-  $struct_right isa SchemaResource, has typeLabel "beadDatabaseName";
+  $struct_right isa SchemaResource, has typeLabel "lastCopiedAt";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -648,7 +2693,25 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "BeadRepository";
-  $struct_right isa SchemaResource, has typeLabel "lastCopiedAt";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadRoute";
+  $struct_right isa SchemaResource, has typeLabel "routePath";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadRoute";
+  $struct_right isa SchemaResource, has typeLabel "routePrefix";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -657,12 +2720,12 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "BeadStatus";
-  $struct_right isa SchemaResource, has typeLabel "Category";
+  $struct_right isa SchemaResource, has typeLabel "isCustom";
   not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
 insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
   $struct_left isa SchemaResource, has typeLabel "BeadStatus";
@@ -675,12 +2738,12 @@ insert
 
 match
   $struct_left isa SchemaResource, has typeLabel "BeadType";
-  $struct_right isa SchemaResource, has typeLabel "Category";
+  $struct_right isa SchemaResource, has typeLabel "isCustom";
   not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
 insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
   $struct_left isa SchemaResource, has typeLabel "BeadType";
@@ -692,17 +2755,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "Priority";
-  $struct_right isa SchemaResource, has typeLabel "Category";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "Priority";
-  $struct_right isa SchemaResource, has typeLabel "name";
+  $struct_left isa SchemaResource, has typeLabel "blocks";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -710,8 +2764,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "Priority";
-  $struct_right isa SchemaResource, has typeLabel "priorityLevel";
+  $struct_left isa SchemaResource, has typeLabel "blocks";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -719,17 +2773,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "BeadLabel";
-  $struct_right isa SchemaResource, has typeLabel "Category";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "BeadLabel";
-  $struct_right isa SchemaResource, has typeLabel "name";
+  $struct_left isa SchemaResource, has typeLabel "blocks";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -737,17 +2782,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "GateType";
-  $struct_right isa SchemaResource, has typeLabel "Category";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "GateType";
-  $struct_right isa SchemaResource, has typeLabel "name";
+  $struct_left isa SchemaResource, has typeLabel "blocks";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -755,17 +2791,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "HistoryEntryType";
-  $struct_right isa SchemaResource, has typeLabel "Category";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "HistoryEntryType";
-  $struct_right isa SchemaResource, has typeLabel "name";
+  $struct_left isa SchemaResource, has typeLabel "causedBy";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -773,17 +2800,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "Lease";
-  $struct_right isa SchemaResource, has typeLabel "Assignment";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "Lease";
-  $struct_right isa SchemaResource, has typeLabel "leaseHolder";
+  $struct_left isa SchemaResource, has typeLabel "causedBy";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -791,8 +2809,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "Lease";
-  $struct_right isa SchemaResource, has typeLabel "grantedAt";
+  $struct_left isa SchemaResource, has typeLabel "causedBy";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -800,8 +2818,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "Lease";
-  $struct_right isa SchemaResource, has typeLabel "leaseExpiresAt";
+  $struct_left isa SchemaResource, has typeLabel "causedBy";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -809,8 +2827,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "Lease";
-  $struct_right isa SchemaResource, has typeLabel "heartbeatAt";
+  $struct_left isa SchemaResource, has typeLabel "childOf";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -818,17 +2836,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
-  $struct_right isa SchemaResource, has typeLabel "ContentExpression";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
-  $struct_right isa SchemaResource, has typeLabel "actor";
+  $struct_left isa SchemaResource, has typeLabel "childOf";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -836,8 +2845,8 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
-  $struct_right isa SchemaResource, has typeLabel "oldValue";
+  $struct_left isa SchemaResource, has typeLabel "childOf";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
@@ -845,31 +2854,13 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
-  $struct_right isa SchemaResource, has typeLabel "newValue";
+  $struct_left isa SchemaResource, has typeLabel "childOf";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
   not {
     (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
 insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
-  $struct_right isa SchemaResource, has typeLabel "createdAt";
-  not {
-    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-  };
-insert
-  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
-
-match
-  $struct_left isa SchemaResource, has typeLabel "Comment";
-  $struct_right isa SchemaResource, has typeLabel "ContentExpression";
-  not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
-  };
-insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
 
 match
   $struct_left isa SchemaResource, has typeLabel "Comment";
@@ -899,21 +2890,1254 @@ insert
   (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
-  $struct_left isa SchemaResource, has typeLabel "related";
-  $struct_right isa SchemaResource, has typeLabel "isConnectedTo";
+  $struct_left isa SchemaResource, has typeLabel "conditionallyBlocks";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
   not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
 insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "conditionallyBlocks";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "conditionallyBlocks";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "conditionallyBlocks";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "delegatedFrom";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "delegatedFrom";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "delegatedFrom";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "delegatedFrom";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "discoveredFrom";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "discoveredFrom";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "discoveredFrom";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "discoveredFrom";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "duplicates";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "duplicates";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "duplicates";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "duplicates";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "GateType";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "actor";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "historyComment";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "newValue";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntry";
+  $struct_right isa SchemaResource, has typeLabel "oldValue";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntryType";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "actor";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "errorText";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "exitCode";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "extraData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "interactionId";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "interactionKind";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "interactionLabel";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "modelName";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "prompt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "reason";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "response";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "toolName";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "grantedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "grantedNode";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "heartbeatAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "leaseExpiresAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Lease";
+  $struct_right isa SchemaResource, has typeLabel "leaseHolder";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Priority";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Priority";
+  $struct_right isa SchemaResource, has typeLabel "priorityLevel";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "actor";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "createdAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "occurredAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "payload";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "provenanceId";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "provenanceSource";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "reference";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "referenceKind";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceKind";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "related";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "related";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "related";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "related";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "relatesTo";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "relatesTo";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "relatesTo";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "relatesTo";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "repliesTo";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "repliesTo";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "repliesTo";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "repliesTo";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "repliesTo";
+  $struct_right isa SchemaResource, has typeLabel "threadId";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StatusCategory";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuery";
+  $struct_right isa SchemaResource, has typeLabel "storedPackage";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuery";
+  $struct_right isa SchemaResource, has typeLabel "storedQueryExplanation";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuery";
+  $struct_right isa SchemaResource, has typeLabel "storedQueryName";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuery";
+  $struct_right isa SchemaResource, has typeLabel "storedQueryText";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuery";
+  $struct_right isa SchemaResource, has typeLabel "storedQueryTitle";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuery";
+  $struct_right isa SchemaResource, has typeLabel "storedVersion";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuestion";
+  $struct_right isa SchemaResource, has typeLabel "storedPackage";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuestion";
+  $struct_right isa SchemaResource, has typeLabel "storedQuestionId";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuestion";
+  $struct_right isa SchemaResource, has typeLabel "storedQuestionOrder";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuestion";
+  $struct_right isa SchemaResource, has typeLabel "storedQuestionText";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuestion";
+  $struct_right isa SchemaResource, has typeLabel "storedVersion";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
 
 match
   $struct_left isa SchemaResource, has typeLabel "supersedes";
-  $struct_right isa SchemaResource, has typeLabel "isBasedOn";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
   not {
-    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
   };
 insert
-  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "supersedes";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "supersedes";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "supersedes";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "tracks";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "tracks";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "tracks";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "tracks";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "validates";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "validates";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "validates";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "validates";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "waitsFor";
+  $struct_right isa SchemaResource, has typeLabel "externalTarget";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "waitsFor";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedAt";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "waitsFor";
+  $struct_right isa SchemaResource, has typeLabel "linkCreatedBy";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "waitsFor";
+  $struct_right isa SchemaResource, has typeLabel "linkData";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "waitsFor";
+  $struct_right isa SchemaResource, has typeLabel "spawnerBeadId";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "waitsFor";
+  $struct_right isa SchemaResource, has typeLabel "waitGate";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "WorkType";
+  $struct_right isa SchemaResource, has typeLabel "name";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "hasParticipant:participant";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "hasParticipant:participationContext";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isAbout:subjectMatter";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isAffectedBy:affectedThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isAffectedBy:effectSource";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isBasedOn:basis";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:categorizedThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isMemberOf:collection";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isMemberOf:member";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isPartOf:whole";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isProducedBy:producer";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isProducedBy:product";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isRecognizedBy:recognizedThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isRecognizedBy:recognizingParty";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "isTriggeredBy:triggeredThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "precedes:predecessor";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "precedes:successor";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "refersTo:referent";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "refersTo:referringThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "related:relatedBead";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "requires:requirement";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "requires:requiringThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadLabel";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadRepository";
+  $struct_right isa SchemaResource, has typeLabel "isMemberOf:collection";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadRoute";
+  $struct_right isa SchemaResource, has typeLabel "isMemberOf:member";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadStatus";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:categorizedThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadStatus";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "BeadType";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "GateType";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "HistoryEntryType";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "isAbout:content";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "isPartOf:part";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Interaction";
+  $struct_right isa SchemaResource, has typeLabel "isPartOf:whole";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Priority";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "isAbout:content";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceEvent";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:categorizedThing";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "ProvenanceKind";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StatusCategory";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuery";
+  $struct_right isa SchemaResource, has typeLabel "storedAnswer:query";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "StoredQuestion";
+  $struct_right isa SchemaResource, has typeLabel "storedAnswer:question";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "WorkType";
+  $struct_right isa SchemaResource, has typeLabel "isCategorizedBy:category";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "storedAnswer";
+  $struct_right isa SchemaResource, has typeLabel "storedAnswer:query";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "storedAnswer";
+  $struct_right isa SchemaResource, has typeLabel "storedAnswer:question";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
 
 # -- END GENERATED STRUCTURAL METADATA --

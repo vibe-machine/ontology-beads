@@ -87,3 +87,49 @@ put $c42_l isa BeadLabel, has name "tvm:agent=active";
 put $c43_l isa BeadLabel, has name "tvm:wave=running";
 
 put $c44_l isa BeadLabel, has name "tvm:wave=done";
+
+put $c45_s isa BeadStatus, has name "hooked";
+
+put $c46_t isa BeadType, has name "message";
+
+put $c47_t isa BeadType, has name "molecule";
+
+put $c48_t isa BeadType, has name "story";
+
+put $c49_t isa BeadType, has name "milestone";
+
+put $c50_g isa GateType, has name "mail";
+
+put $c51_h isa HistoryEntryType, has name "compacted";
+
+put $c52_h isa HistoryEntryType, has name "lease_reclaimed";
+
+put $c53_w isa WorkType, has name "mutex";
+
+put $c54_w isa WorkType, has name "open_competition";
+
+put $c55_k isa ProvenanceKind, has name "cut";
+
+put $c56_k isa ProvenanceKind, has name "claim";
+
+put $c57_k isa ProvenanceKind, has name "suspend";
+
+put $c58_k isa ProvenanceKind, has name "resume";
+
+put $c59_k isa ProvenanceKind, has name "handoff";
+
+put $c60_k isa ProvenanceKind, has name "commit";
+
+put $c61_k isa ProvenanceKind, has name "land";
+
+put $c62_k isa ProvenanceKind, has name "used";
+
+put $c63_y isa StatusCategory, has name "active";
+
+put $c64_y isa StatusCategory, has name "wip";
+
+put $c65_y isa StatusCategory, has name "done";
+
+put $c66_y isa StatusCategory, has name "frozen";
+
+put $c67_y isa StatusCategory, has name "unspecified";

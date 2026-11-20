@@ -1,0 +1,1 @@
+match $repo isa BeadRepository, has name "OneWorkspace"; insert $route isa BeadRoute, has routePrefix "gist-", has routePath "/Users/dev/OneWorkspace"; isMemberOf (member: $route, collection: $repo);

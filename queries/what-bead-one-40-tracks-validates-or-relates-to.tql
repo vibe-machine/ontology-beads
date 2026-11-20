@@ -1,0 +1,16 @@
+# Which beads does this bead track, validate, or loosely relate to?
+# Follows the three kinds of link out of bead one-40 and says which kind each one is.
+match
+  $bead isa Bead, has beadId "one-40";
+  {
+    tracks (referringThing: $bead, referent: $other);
+    let $kind = "tracks";
+  } or {
+    validates (recognizingParty: $bead, recognizedThing: $other);
+    let $kind = "validates";
+  } or {
+    relatesTo (referringThing: $bead, referent: $other);
+    let $kind = "relates-to";
+  };
+  $other has beadId $otherId, has title $otherTitle;
+select $kind, $otherId, $otherTitle;

@@ -1,0 +1,211 @@
+# Proposed additions to the beads model (0.1.2 -> next version), for questions 24 to 46.
+# Drafted 2026-11-20 from Beads tag v1.3.4 (internal/types/types.go) and a live 1.3.4 database.
+# A proposal for Studio, not the published schema. Everything here is added; nothing in 0.1.2 is removed.
+#
+# How the links are modelled: 0.1.2 writes a link as a gist relation (isPartOf, precedes,
+# isTriggeredBy, isBasedOn) or as `related` / `supersedes`. A relation of gist cannot carry
+# beads' who-and-when, so every link kind becomes a relation of this package under the gist
+# relation that says what it means, owning the link's creator, time and extra data. Queries
+# and functions that match the gist relation keep matching the new ones.
+
+define
+
+  # ---- Who did it (questions 24, 25) ----
+  attribute createdBy, value string;
+  attribute closedBySession, value string;
+
+  # ---- Planning facts (34 to 37) ----
+  attribute specId, value string;
+  attribute estimatedMinutes, value integer;
+  attribute dueAt, value datetime;
+  attribute deferUntil, value datetime;
+  attribute pinned, value boolean;
+  attribute isTemplate, value boolean;
+
+  # ---- Outside systems and free-form data (38, 39) ----
+  attribute externalRef, value string;
+  attribute sourceSystem, value string;
+  attribute freeFormData, value string;
+
+  # ---- Deleted and compacted beads (40, 41) ----
+  attribute deletedAt, value datetime;
+  attribute compactionLevel, value integer;
+  attribute compactedAt, value datetime;
+  attribute compactedAtCommit, value string;
+  attribute originalSize, value integer;
+
+  # ---- Gates (33) ----
+  attribute awaitId, value string;
+  attribute timeoutSeconds, value integer;
+  attribute waiter, value string;
+
+  # ---- Links (26 to 32) ----
+  attribute linkCreatedBy, value string;
+  attribute linkCreatedAt, value datetime;
+  attribute linkData, value string;
+  attribute externalTarget, value string;
+  attribute threadId, value string;
+  attribute waitGate, value string @values("all-children", "any-children");
+  attribute spawnerBeadId, value string;
+
+  # ---- Leases, history (44, 18) ----
+  attribute grantedNode, value string;
+  attribute historyComment, value string;
+
+  # ---- What agents did (42, 43) ----
+  attribute interactionId, value string;
+  attribute modelName, value string;
+  attribute prompt, value string;
+  attribute response, value string;
+  attribute errorText, value string;
+  attribute toolName, value string;
+  attribute exitCode, value integer;
+  attribute interactionLabel, value string;
+  attribute reason, value string;
+  attribute extraData, value string;
+  attribute provenanceId, value string;
+  attribute reference, value string;
+  attribute referenceKind, value string;
+  attribute payload, value string;
+  attribute provenanceSource, value string;
+  attribute occurredAt, value datetime;
+
+  # ---- Repository settings (45, 46) ----
+  attribute isCustom, value boolean;
+  attribute routePrefix, value string;
+  attribute routePath, value string;
+
+  # ---- Bead: the new facts, each optional ----
+  entity Bead,
+    owns createdBy @card(0..1),
+    owns closedBySession @card(0..1),
+    owns specId @card(0..1),
+    owns estimatedMinutes @card(0..1),
+    owns dueAt @card(0..1),
+    owns deferUntil @card(0..1),
+    owns pinned @card(0..1),
+    owns isTemplate @card(0..1),
+    owns externalRef @card(0..1),
+    owns sourceSystem @card(0..1),
+    owns freeFormData @card(0..1),
+    owns deletedAt @card(0..1),
+    owns compactionLevel @card(0..1),
+    owns compactedAt @card(0..1),
+    owns compactedAtCommit @card(0..1),
+    owns originalSize @card(0..1),
+    owns awaitId @card(0..1),
+    owns timeoutSeconds @card(0..1),
+    owns waiter @card(0..),
+    plays refersTo:referringThing,
+    plays refersTo:referent,
+    plays requires:requiringThing,
+    plays requires:requirement,
+    plays isAffectedBy:affectedThing,
+    plays isAffectedBy:effectSource,
+    plays isRecognizedBy:recognizedThing,
+    plays isRecognizedBy:recognizingParty,
+    plays isProducedBy:product,
+    plays isProducedBy:producer,
+    plays isAllocatedBy:allocatedThing,
+    plays isAllocatedBy:allocator;
+
+  # ---- The 19 link kinds of Beads ----
+  # Each owns who added it, when, its extra data, and a target outside this repository.
+
+  # Affect what is ready
+  relation childOf sub isPartOf,                      # parent-child
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation blocks sub precedes,                       # blocks
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation conditionallyBlocks sub precedes,          # conditional-blocks: the successor runs only if the predecessor fails
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation waitsFor sub requires,                     # waits-for: waits for the children of the required bead
+    owns waitGate @card(0..1), owns spawnerBeadId @card(0..1),
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+
+  # Where a bead came from
+  relation discoveredFrom sub isTriggeredBy,          # discovered-from
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation causedBy sub isTriggeredBy,                # caused-by
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation delegatedFrom sub isBasedOn,               # delegated-from
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation supersedes,                                # supersedes (already in 0.1.2, sub isBasedOn)
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+
+  # Loose links
+  relation related,                                   # related (already in 0.1.2, sub isConnectedTo)
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation relatesTo sub refersTo,                    # relates-to
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation duplicates sub refersTo,                   # duplicates: the referring bead is the duplicate
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation repliesTo sub refersTo,                    # replies-to, with its conversation
+    owns threadId @card(0..1),
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation tracks sub refersTo,                       # tracks
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+
+  # Active only while another bead is open
+  relation activeUntil sub isAffectedBy,              # until
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+
+  # Approval and people
+  relation validates sub isRecognizedBy,              # validates: the recognizing bead validates the recognized one
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation approvedBy sub isRecognizedBy,             # approved-by
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation attests sub isRecognizedBy,                # attests
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation authoredBy sub isProducedBy,               # authored-by
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+  relation assignedTo sub isAllocatedBy,              # assigned-to
+    owns linkCreatedBy @card(0..1), owns linkCreatedAt @card(0..1), owns linkData @card(0..1), owns externalTarget @card(0..1);
+
+  # ---- Leases and history ----
+  entity Lease, owns grantedNode @card(0..1);
+  entity HistoryEntry, owns historyComment @card(0..1);
+
+  # ---- What agents did ----
+  entity InteractionKind sub Category, owns name, plays isCategorizedBy:category;
+  entity ProvenanceKind sub Category, owns name, plays isCategorizedBy:category;
+  entity WorkType sub Category, owns name, plays isCategorizedBy:category;
+  entity StatusCategory sub Category, owns name, plays isCategorizedBy:category;
+
+  entity Interaction sub HistoricalEvent,             # one thing an agent or tool did on a bead
+    owns interactionId @key,
+    owns actor @card(0..1),
+    owns createdAt @card(0..1),
+    owns modelName @card(0..1),
+    owns prompt @card(0..1),
+    owns response @card(0..1),
+    owns errorText @card(0..1),
+    owns toolName @card(0..1),
+    owns exitCode @card(0..1),
+    owns interactionLabel @card(0..1),
+    owns reason @card(0..1),
+    owns extraData @card(0..1),
+    plays isCategorizedBy:categorizedThing,
+    plays isAbout:content,
+    plays isPartOf:part,
+    plays isPartOf:whole;
+
+  entity ProvenanceEvent sub HistoricalEvent,         # cut, claim, suspend, resume, handoff, commit, land, used
+    owns provenanceId @key,
+    owns actor @card(0..1),
+    owns reference @card(0..1),
+    owns referenceKind @card(0..1),
+    owns payload @card(0..1),
+    owns provenanceSource @card(0..1),
+    owns occurredAt @card(0..1),
+    owns createdAt @card(0..1),
+    plays isCategorizedBy:categorizedThing,
+    plays isAbout:content;
+
+  # ---- Repository settings ----
+  entity BeadStatus, owns isCustom @card(0..1), plays isCategorizedBy:categorizedThing;   # a custom status falls in a StatusCategory
+  entity BeadType, owns isCustom @card(0..1);
+  entity BeadRoute sub Content,                       # an id prefix and the folder its beads live in
+    owns routePrefix @key,
+    owns routePath @card(0..1),
+    plays isMemberOf:member;

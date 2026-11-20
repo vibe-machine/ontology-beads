@@ -1,0 +1,72 @@
+{
+  "$schema": "./package-manifest.schema.json",
+  "manifestVersion": "1.0.0",
+  "package": {
+    "name": "beads",
+    "version": "0.2.0"
+  },
+  "upstream": {
+    "repoUrl": "https://github.com/vibe-machine/ontology-beads",
+    "tag": "v0.2.0",
+    "commit": "5621bbcd3a52224e70845b89776b343fc91d8ab3",
+    "sourceArtifacts": [
+      {
+        "path": "package.json",
+        "sha256": "a7660510d76c4ed5ef089ccdb9f9abdd47372152fcdce0a313044b16eb24c8ae"
+      },
+      {
+        "path": "schema/stored-queries.tql",
+        "sha256": "6423e0c068ca11c61ed38d31f4c2abf49dadcda3b8759d30888193dfe8c986d0"
+      },
+      {
+        "path": "schema/beads.tql",
+        "sha256": "700c07eaef801d804fd9d8b41acae3ef0989cb2959372eec74b83e078d840dea"
+      },
+      {
+        "path": "data/beads-categories.tql",
+        "sha256": "a265724eef7affda78f977c482d6f4ada4708e07cd3015e2dcc30c22018731c4"
+      },
+      {
+        "path": "data/beads-questions.tql",
+        "sha256": "acc4a9f1817badfdfd43a4b6090ca5b6034e7e2aaf2ac4d3c441da32de05a00a"
+      }
+    ]
+  },
+  "generator": {
+    "name": "hand-authored-package-bootstrap",
+    "version": "0.1.0",
+    "generatedAt": "2026-11-20T15:57:06Z"
+  },
+  "artifacts": [
+    {
+      "kind": "meta-schema",
+      "path": "schema/self-describing-schema.tql",
+      "sha256": "d610d34df784dce8fcf651d5b7dbc398d24c0fa4be920d8c85b053671dcf5eba"
+    },
+    {
+      "kind": "provenance-schema",
+      "path": "schema/package-provenance.tql",
+      "sha256": "271d1880bde600bd270ac213bcab75cbdc1aedf62e861570429ca6cfef518c86"
+    },
+    {
+      "kind": "administrative-schema",
+      "path": "schema/administrative-operations.tql",
+      "sha256": "2e5960216954378bddeaee7d38a6590538b5be1ee0a0755abe48e0d90f93d5b7"
+    },
+    {
+      "kind": "documentation",
+      "path": "data/beads-schema-docs.tql",
+      "sha256": "0e855d52853675020f9e07314fc69cffc085c9d458479f23d877f73d9d362dc9"
+    },
+    {
+      "kind": "manifest-schema",
+      "path": "manifests/package-manifest.schema.json",
+      "sha256": "07599fe20623f3304bec0987320050f12efc1faf04fad7c12176ffe88e0b6a48"
+    },
+    {
+      "kind": "provenance-seeds",
+      "path": "data/beads-provenance.tql",
+      "sha256": "26e99a729e5f0919977afebe7dd785dec7f3eb01bcd5eb5d0529096c9226ca58"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+# Schema migration for the beads package from v0.1.2 to v0.2.0: the complete model (questions 24 to 46).
+# Only adds: new optional facts on Bead, a relation per link kind of beads carrying who added it and when,
+# interactions, provenance events, work types, status categories and id routes. Applied in one schema transaction.
+define
+  attribute createdBy, value string;
+  attribute closedBySession, value string;
+  attribute specId, value string;
+  attribute estimatedMinutes, value integer;
+  attribute dueAt, value datetime;
+  attribute deferUntil, value datetime;
+  attribute pinned, value boolean;
+  attribute isTemplate, value boolean;
+  attribute externalRef, value string;
+  attribute sourceSystem, value string;
+  attribute freeFormData, value string;
+  attribute deletedAt, value datetime;
+  attribute compactionLevel, value integer;
+  attribute compactedAt, value datetime;
+  attribute compactedAtCommit, value string;
+  attribute originalSize, value integer;
+  attribute awaitId, value string;
+  attribute timeoutSeconds, value integer;
+  attribute waiter, value string;
+  attribute linkCreatedBy, value string;
+  attribute linkCreatedAt, value datetime;
+  attribute linkData, value string;
+  attribute externalTarget, value string;
+  attribute threadId, value string;
+  attribute waitGate, value string @values("all-children", "any-children");
+  attribute spawnerBeadId, value string;
+  attribute grantedNode, value string;
+  attribute historyComment, value string;
+  attribute interactionId, value string;
+  attribute interactionKind, value string;
+  attribute modelName, value string;
+  attribute prompt, value string;
+  attribute response, value string;
+  attribute errorText, value string;
+  attribute toolName, value string;
+  attribute exitCode, value integer;
+  attribute interactionLabel, value string;
+  attribute reason, value string;
+  attribute extraData, value string;
+  attribute provenanceId, value string;
+  attribute reference, value string;
+  attribute referenceKind, value string;
+  attribute payload, value string;
+  attribute provenanceSource, value string;
+  attribute occurredAt, value datetime;
+  attribute isCustom, value boolean;
+  attribute routePrefix, value string;
+  attribute routePath, value string;
+  entity Bead,
+    owns createdBy @card(0..1),
+    owns closedBySession @card(0..1),
+    owns specId @card(0..1),
+    owns estimatedMinutes @card(0..1),
+    owns dueAt @card(0..1),
+    owns deferUntil @card(0..1),
+    owns pinned @card(0..1),
+    owns isTemplate @card(0..1),
+    owns externalRef @card(0..1),
+    owns sourceSystem @card(0..1),
+    owns freeFormData @card(0..1),
+    owns deletedAt @card(0..1),
+    owns compactionLevel @card(0..1),
+    owns compactedAt @card(0..1),
+    owns compactedAtCommit @card(0..1),
+    owns originalSize @card(0..1),
+    owns awaitId @card(0..1),
+    owns timeoutSeconds @card(0..1),
+    owns waiter @card(0..),
+    plays refersTo:referringThing,
+    plays refersTo:referent,
+    plays requires:requiringThing,
+    plays requires:requirement,
+    plays isAffectedBy:affectedThing,
+    plays isAffectedBy:effectSource,
+    plays isRecognizedBy:recognizedThing,
+    plays isRecognizedBy:recognizingParty,
+    plays isProducedBy:product,
+    plays isProducedBy:producer,
+    plays hasParticipant:participationContext,
+    plays hasParticipant:participant;
+  relation childOf sub isPartOf,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation blocks sub precedes,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation conditionallyBlocks sub precedes,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation waitsFor sub requires,
+    owns waitGate @card(0..1),
+    owns spawnerBeadId @card(0..1),
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation discoveredFrom sub isTriggeredBy,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation causedBy sub isTriggeredBy,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation delegatedFrom sub isBasedOn,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation relatesTo sub refersTo,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation duplicates sub refersTo,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation repliesTo sub refersTo,
+    owns threadId @card(0..1),
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation tracks sub refersTo,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation activeUntil sub isAffectedBy,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation validates sub isRecognizedBy,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation approvedBy sub isRecognizedBy,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation attests sub isRecognizedBy,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation authoredBy sub isProducedBy,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation assignedTo sub hasParticipant,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation related,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  relation supersedes,
+    owns linkCreatedBy @card(0..1),
+    owns linkCreatedAt @card(0..1),
+    owns linkData @card(0..1),
+    owns externalTarget @card(0..1);
+  entity BeadStatus,
+    owns isCustom @card(0..1),
+    plays isCategorizedBy:categorizedThing;
+  entity BeadType,
+    owns isCustom @card(0..1);
+  entity Lease,
+    owns grantedNode @card(0..1);
+  entity HistoryEntry,
+    owns historyComment @card(0..1);
+  entity WorkType sub Category, owns name, plays isCategorizedBy:category;
+  entity ProvenanceKind sub Category, owns name, plays isCategorizedBy:category;
+  entity StatusCategory sub Category, owns name, plays isCategorizedBy:category;
+
+  entity Interaction sub HistoricalEvent,
+    owns interactionId @key,
+    owns interactionKind @card(0..1),
+    owns actor @card(0..1),
+    owns createdAt @card(0..1),
+    owns modelName @card(0..1),
+    owns prompt @card(0..1),
+    owns response @card(0..1),
+    owns errorText @card(0..1),
+    owns toolName @card(0..1),
+    owns exitCode @card(0..1),
+    owns interactionLabel @card(0..1),
+    owns reason @card(0..1),
+    owns extraData @card(0..1),
+    plays isAbout:content,
+    plays isPartOf:part,
+    plays isPartOf:whole;
+
+  entity ProvenanceEvent sub HistoricalEvent,
+    owns provenanceId @key,
+    owns actor @card(0..1),
+    owns reference @card(0..1),
+    owns referenceKind @card(0..1),
+    owns payload @card(0..1),
+    owns provenanceSource @card(0..1),
+    owns occurredAt @card(0..1),
+    owns createdAt @card(0..1),
+    plays isCategorizedBy:categorizedThing,
+    plays isAbout:content;
+
+  entity BeadRoute sub Content,
+    owns routePrefix @key,
+    owns routePath @card(0..1),
+    plays isMemberOf:member;
