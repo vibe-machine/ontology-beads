@@ -3,16 +3,16 @@
   "manifestVersion": "1.0.0",
   "package": {
     "name": "beads",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "upstream": {
     "repoUrl": "https://github.com/vibe-machine/ontology-beads",
-    "tag": "v0.1.1",
-    "commit": "c9f2b83c9062ff55bf75442faae7dff7689b7351",
+    "tag": "v0.1.2",
+    "commit": "1309be1554acc485ef8ce1934396f1e87e3d6766",
     "sourceArtifacts": [
       {
         "path": "package.json",
-        "sha256": "0dab8c21eb7539e5f4a320aed860968bdd55d9edc752489715c70919a236aeab"
+        "sha256": "e3f8927c8a397a8e58a9efe73c26c05f55b7159e026dd15295f397393b443d4a"
       },
       {
         "path": "schema/beads.tql",
@@ -23,28 +23,28 @@
   "generator": {
     "name": "lingo-lab-package",
     "version": "1.0.0",
-    "generatedAt": "2026-11-19T23:37:38Z"
+    "generatedAt": "2026-11-20T00:09:50Z"
   },
   "artifacts": [
     {
       "kind": "meta-schema",
       "path": "schema/self-describing-schema.tql",
-      "sha256": "bd59c6dd96779c86373ddc91514e24db68aae531f5ee87d41f25bab1529d8787"
+      "sha256": "7738b3db8a96850bb49acd15e51cb8c34636524dd0ff819a1d69b4057b4850db"
     },
     {
       "kind": "provenance-schema",
       "path": "schema/package-provenance.tql",
-      "sha256": "3408bcf2a8a3863ff17a253af5982e5726ad425189cdf609b44fbd0c1eaea223"
+      "sha256": "604a3707b83b7d11394a11c3865950df5835eacdecc82e046176dbe4af9f0e47"
     },
     {
       "kind": "administrative-schema",
       "path": "schema/administrative-operations.tql",
-      "sha256": "53a75aa4e180c07cec50845c3e981167b2d4439b7541175b4eb0837c30a58283"
+      "sha256": "963844bf64b52240da0292da3a473bc12a25adcf5301b254fc6f007fb920e8d4"
     },
     {
       "kind": "documentation",
       "path": "data/beads-schema-docs.tql",
-      "sha256": "ed94b02f205cef4e4f857a8328e08f3a0927062a5ad5e5b6e8069321a5c231b9"
+      "sha256": "2801ba8bbeb13a1fb8f8b31d706ded73233c637e2e3dfd2dd2d7e3a965306fd8"
     },
     {
       "kind": "manifest-schema",
@@ -54,7 +54,7 @@
     {
       "kind": "provenance-seeds",
       "path": "data/beads-provenance.tql",
-      "sha256": "737922c913a39b7b8f8b7f5f49f1aa8d830c9ac8953282fb228fd62d6fd81b79"
+      "sha256": "05e2ff1efc02de0ab2f2cd1caea48f2358b7ef15251b4b4e9c8bb4c9e6468b51"
     }
   ]
 }

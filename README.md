@@ -6,5 +6,6 @@ This package was created by the Lingo Lab and has not been published: it has no 
 
 - `schema/beads.tql` — the model's schema.
 - `data/beads-schema-docs.tql` — type documentation, generated from the model's descriptions.
-- `data/beads-provenance.tql` and `manifests/beads-v0.1.1.package-manifest.json` — generated provenance.
+- `data/beads-provenance.tql` and `manifests/beads-v0.1.2.package-manifest.json` — generated provenance.
 - `sandbox/` — sample data for the Lab's query sandbox, declared under `sampleData`; never installed with the package.
+- `migrations/` — how a database with an earlier published version installed is brought to this one, declared under `migration`.

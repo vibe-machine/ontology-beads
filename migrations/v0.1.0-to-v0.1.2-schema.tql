@@ -1,0 +1,39 @@
+# Schema migration for the beads package from v0.1.0 to v0.1.2.
+# Written by Lingo Studio from the two versions' schema files; applied in one schema transaction.
+undefine
+  @key from Bead owns beadId;
+
+define
+  attribute folderPath,
+    value string;
+  attribute beadDatabaseName,
+    value string;
+  attribute lastCopiedCommit,
+    value string;
+  attribute lastCopiedFingerprint,
+    value string;
+  attribute lastCopiedAt,
+    value datetime;
+  attribute tmuxSocket,
+    value string;
+  attribute tmuxSession,
+    value string;
+  attribute worktreePath,
+    value string;
+  attribute baseBranch,
+    value string;
+  attribute agentPid,
+    value integer;
+  entity BeadRepository sub Collection,
+    owns name,
+    owns folderPath,
+    owns beadDatabaseName,
+    owns lastCopiedCommit,
+    owns lastCopiedFingerprint,
+    owns lastCopiedAt,
+    plays isMemberOf:collection;
+  Bead owns tmuxSocket;
+  Bead owns tmuxSession;
+  Bead owns worktreePath;
+  Bead owns baseBranch;
+  Bead owns agentPid;

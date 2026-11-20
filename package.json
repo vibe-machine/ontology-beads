@@ -1,7 +1,7 @@
 {
   "name": "beads",
   "displayName": "Beads",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Beads 1.3.4 for planning work with agents, across repositories: beads with status, type, priority, labels, blocks and parent links, gates, leases, waves, history, comments and dispatch facts. Answers what is ready, blocked, held, stale, and how far each repository's copy has got.",
   "author": "vibe-machine",
   "license": "MIT",
@@ -102,7 +102,7 @@
     "release:check": "../ontology-tooling/bin/ont release --repo . --validate-only"
   },
   "manifests": [
-    "manifests/beads-v0.1.1.package-manifest.json"
+    "manifests/beads-v0.1.2.package-manifest.json"
   ],
   "assembly": {
     "loadOrder": [
@@ -123,12 +123,80 @@
       "data/beads-schema-docs.tql",
       "data/beads-provenance.tql",
       "manifests/package-manifest.schema.json",
-      "manifests/beads-v0.1.1.package-manifest.json"
+      "manifests/beads-v0.1.2.package-manifest.json"
     ]
   },
   "provenance": {
-    "manifest": "manifests/beads-v0.1.1.package-manifest.json",
+    "manifest": "manifests/beads-v0.1.2.package-manifest.json",
     "status": "bootstrap"
+  },
+  "migration": {
+    "format": 1,
+    "supportsUpgradeFrom": [
+      "0.1.0",
+      "0.1.1"
+    ],
+    "plans": [
+      {
+        "id": "beads-0.1.0-to-0.1.2",
+        "from": "0.1.0",
+        "to": "0.1.2",
+        "mode": "compatible",
+        "snapshot": {
+          "required": true,
+          "label": "pre-beads-0.1.2-migration"
+        },
+        "phases": [
+          {
+            "id": "schema",
+            "units": [
+              {
+                "kind": "schema",
+                "path": "migrations/v0.1.0-to-v0.1.2-schema.tql"
+              }
+            ]
+          },
+          {
+            "id": "data",
+            "units": [
+              {
+                "kind": "write",
+                "path": "data/beads-categories.tql"
+              },
+              {
+                "kind": "write",
+                "path": "data/beads-questions.tql"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "beads-0.1.1-to-0.1.2",
+        "from": "0.1.1",
+        "to": "0.1.2",
+        "mode": "compatible",
+        "snapshot": {
+          "required": true,
+          "label": "pre-beads-0.1.2-migration"
+        },
+        "phases": [
+          {
+            "id": "data",
+            "units": [
+              {
+                "kind": "write",
+                "path": "data/beads-categories.tql"
+              },
+              {
+                "kind": "write",
+                "path": "data/beads-questions.tql"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   "legacyDocumentation": {
     "deprecatedFiles": [
